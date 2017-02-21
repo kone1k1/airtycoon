@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<aircrafts>
+    <aircraft>
+        <id>0</id>
+        <manufacturer>Boing</manufacturer>
+        <type>737-400</type>
+        <max_pax>188</max_pax>
+        <textinfo>Eine Boing 737-400 ist ein Flugzeug aus dem Jahr ....</textinfo>
+        <max_range>5186</max_range>
+        <price>15000000</price>
+        <speed>907</speed>
+        <max_fuel>16084</max_fuel> 
+    </aircraft>
+    <aircraft>
+        <id>1</id>
+        <manufacturer>Boing</manufacturer>
+        <type>727-200</type>
+        <max_pax>189</max_pax>
+        <textinfo>Eine Boing 727-400 ist ein Flugzeug aus dem Jahr ....</textinfo>
+        <max_range>4020</max_range>
+        <price>15000000</price>
+        <speed>965</speed>
+        <max_fuel>16084</max_fuel> 
+    </aircraft>
+    <aircraft>
+        <id>2</id>
+        <manufacturer>Airbus</manufacturer>
+        <type>A320-200</type>
+        <max_pax>180</max_pax>
+        <textinfo>Eine Boing 727-400 ist ein Flugzeug aus dem Jahr ....</textinfo>
+        <max_range>4020</max_range>
+        <price>20000000</price>
+        <speed>871</speed>
+        <max_fuel>30000</max_fuel> 
+    </aircraft>
+
+</aircrafts>
+

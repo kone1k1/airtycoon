@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<airports>
+    <airport>
+        <id>0</id>
+        <name>Berlin</name>
+        <lat>52.52000659999999</lat>
+        <lng>13.404953999999975</lng>
+        <costindex>7</costindex>
+    </airport>
+    <airport>
+        <id>1</id>
+        <name>Frankfurt</name>
+        <lat>50.11092209999999</lat>
+        <lng>8.682126700000026</lng>
+        <costindex>10</costindex>
+    </airport>       
+    <airport>
+        <id>2</id>
+        <name>München</name>
+        <lat>48.1351253</lat>
+        <lng>11.581980599</lng>
+        <costindex>6</costindex>
+    </airport>
+</airports>
