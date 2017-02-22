@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<players>
+    <player>
+        <id>0</id>
+        <name>mastercs</name>
+        <money>2000000</money>
+    </player>
+    <player>
+        <id>1</id>
+        <name>jg</name>
+        <money>2000000</money>
+    </player>       
+</players>
