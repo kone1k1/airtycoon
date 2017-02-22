@@ -5,11 +5,16 @@
  */
 package gui;
 
+import elements.Player;
+import functions.xml_reader;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
@@ -18,16 +23,47 @@ import javafx.scene.control.TextArea;
  */
 public class MenueController implements Initializable {
 
+    private xml_reader xml = new xml_reader();
+
+    private Player[] playerlist;
+
     @FXML
-    private void exitProg() {
-        txt_area.setText("Hallo Welt");
-    }
+    TextField txtPlayername;
+
     @FXML
-    TextArea txt_area;
+    ListView lstSaves;
+
+    ObservableList<Player> savegame;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        loadPlayers();
 
     }
 
+    @FXML
+    private void newGame() {
+        if (txtPlayername.getText().length() > 0) {
+            Player pl = new Player(txtPlayername.getText());
+        } else {
+
+        }
+    }
+
+    @FXML
+    private void loadGame() {
+
+    }
+
+    private void loadPlayers() {
+        playerlist = new Player[xml.getNumber_players()];
+        System.arraycopy(xml.getPlayers(), 0, playerlist, 0, xml.getNumber_players());
+        savegame = FXCollections.observableArrayList(playerlist);
+        lstSaves.setItems(savegame);
+    }
+
+    @FXML
+    private void exitProg() {
+        System.exit(1);
+    }
 }

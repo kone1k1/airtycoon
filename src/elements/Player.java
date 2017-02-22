@@ -71,6 +71,11 @@ public class Player {
         fleet[plane_id] = null;
     }
 
+    @Override
+    public String toString() {
+        return "ID: " + id + System.lineSeparator() + "Name: " + name + System.lineSeparator() + "Bankguthaben: " + account.getMoney();
+    }
+
     public Airplane[] getFleet() {
 
         return fleet;

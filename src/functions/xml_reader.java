@@ -5,8 +5,7 @@
  */
 package functions;
 
-import elements.Airplane;
-import elements.Airport;
+import elements.*;
 import java.io.File;
 import java.io.IOException;
 import javax.xml.parsers.DocumentBuilder;
@@ -26,12 +25,15 @@ public class xml_reader {
 
     Airport[] airports;
     Airplane[] airplanes;
+    Player[] players;
     int number_airplanes;
     int number_airports;
+    int number_players;
 
     public xml_reader() {
         load_airports();
         load_airplanes();
+        load_players();
     }
 
     private void load_airports() {
@@ -114,6 +116,39 @@ public class xml_reader {
 
     }
 
+    private void load_players() {
+        byte id;
+        String name;
+        int money;
+
+        try {
+            File stocks = new File("src/air_tycoon/core/players.xml");
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(stocks);
+            doc.getDocumentElement().normalize();
+            NodeList nodes = doc.getElementsByTagName("player");
+            players = new Player[nodes.getLength()];
+            number_players = nodes.getLength();
+            for (int i = 0; i < nodes.getLength(); i++) {
+
+                Node node = nodes.item(i);
+
+                if (node.getNodeType() == Node.ELEMENT_NODE) {
+
+                    Element element = (Element) node;
+                    id = Byte.parseByte(getValue("id", element));
+                    name = getValue("name", element);
+                    money = Integer.parseInt(getValue("money", element));
+                    players[i] = new Player(id, name, new Bank(id, money), airplanes);
+
+                }
+            }
+        } catch (IOException | NumberFormatException | ParserConfigurationException | SAXException ex) {
+        }
+
+    }
+
     private static String getValue(String tag, Element element) {
         NodeList nodes = element.getElementsByTagName(tag).item(0).getChildNodes();
         Node node = (Node) nodes.item(0);
@@ -126,6 +161,14 @@ public class xml_reader {
 
     public int getNumber_airports() {
         return number_airports;
+    }
+
+    public int getNumber_players() {
+        return number_players;
+    }
+
+    public Player[] getPlayers() {
+        return players;
     }
 
     public Airplane[] getAirplanes() {

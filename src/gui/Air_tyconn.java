@@ -22,20 +22,8 @@ public class Air_tyconn extends Application {
     public static void main(String[] args) {
         //Ladeabschnitt
         launch(args);
-        xml_reader xml = new xml_reader();
-        Airport[] airports = new Airport[xml.getNumber_airports()];
-        Airplane[] airplanes = new Airplane[xml.getNumber_airplanes()];
-        System.arraycopy(xml.getAirports(), 0, airports, 0, xml.getNumber_airports());
-        System.arraycopy(xml.getAirplanes(), 0, airplanes, 0, xml.getNumber_airplanes());
+
         //Ladeabschnitt ende
-
-        Player lisa = new Player("Lisa");
-
-        lisa.setFleet(airplanes[0]);
-        lisa.getAirplane(0).printLocation();
-        lisa.getAirplane(0).fly(airports[2]);
-        lisa.getAirplane(0).printLocation();
-
     }
 
     @Override
