@@ -26,9 +26,6 @@ public class xml_reader {
     Airport[] airports;
     Airplane[] airplanes;
     Player[] players;
-    int number_airplanes;
-    int number_airports;
-    int number_players;
 
     public xml_reader() {
         load_airports();
@@ -51,7 +48,6 @@ public class xml_reader {
             doc.getDocumentElement().normalize();
             NodeList nodes = doc.getElementsByTagName("airport");
             airports = new Airport[nodes.getLength()];
-            number_airports = nodes.getLength();
             for (int i = 0; i < nodes.getLength(); i++) {
 
                 Node node = nodes.item(i);
@@ -91,7 +87,6 @@ public class xml_reader {
             doc.getDocumentElement().normalize();
             NodeList nodes = doc.getElementsByTagName("aircraft");
             airplanes = new Airplane[nodes.getLength()];
-            number_airplanes = nodes.getLength();
             for (int i = 0; i < nodes.getLength(); i++) {
 
                 Node node = nodes.item(i);
@@ -129,7 +124,6 @@ public class xml_reader {
             doc.getDocumentElement().normalize();
             NodeList nodes = doc.getElementsByTagName("player");
             players = new Player[nodes.getLength()];
-            number_players = nodes.getLength();
             for (int i = 0; i < nodes.getLength(); i++) {
 
                 Node node = nodes.item(i);
@@ -153,18 +147,6 @@ public class xml_reader {
         NodeList nodes = element.getElementsByTagName(tag).item(0).getChildNodes();
         Node node = (Node) nodes.item(0);
         return node.getNodeValue();
-    }
-
-    public int getNumber_airplanes() {
-        return number_airplanes;
-    }
-
-    public int getNumber_airports() {
-        return number_airports;
-    }
-
-    public int getNumber_players() {
-        return number_players;
     }
 
     public Player[] getPlayers() {
