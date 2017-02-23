@@ -45,14 +45,17 @@ public class MenueController implements Initializable {
     private void newGame() {
         if (txtPlayername.getText().length() > 0) {
             Player pl = new Player(txtPlayername.getText());
-        } else {
-
         }
     }
 
     @FXML
     private void loadGame() {
+        try {
+            Player loadedPlayer = (Player) lstSaves.getSelectionModel().getSelectedItem();
+            System.out.println(loadedPlayer.toString());
+        } catch (Exception e) {
 
+        }
     }
 
     private void loadPlayers() {
