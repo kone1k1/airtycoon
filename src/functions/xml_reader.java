@@ -41,7 +41,7 @@ public class xml_reader {
         byte costindex;
 
         try {
-            File stocks = new File("src/air_tycoon/core/airports.xml");
+            File stocks = new File("src/core/airports.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(stocks);
@@ -80,7 +80,7 @@ public class xml_reader {
         short max_fuel;
 
         try {
-            File stocks = new File("src/air_tycoon/core/aircrafts.xml");
+            File stocks = new File("src/core/aircrafts.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(stocks);
@@ -117,7 +117,7 @@ public class xml_reader {
         int money;
 
         try {
-            File stocks = new File("src/air_tycoon/core/players.xml");
+            File stocks = new File("src/core/players.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(stocks);
