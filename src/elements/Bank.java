@@ -13,24 +13,19 @@ public class Bank {
 
     private final byte id;
     private int money;
+    private int credit;
 
-    /**
-     * Laden eines Spielstandes
-     *
-     * @param id gleich der spieler id
-     * @param money aktuelles guthaben
-     */
+    //Spiel Laden
     public Bank(byte id, int money) {
         this.id = id;
         this.money = money;
     }
 
-    /**
-     * Neuer Spielstand
-     */
+    //Neues Spiel
     public Bank() {
         id = 0;
         money = 2500000;
+        credit = 0;
 
     }
 
@@ -49,5 +44,13 @@ public class Bank {
 
     public int getMoney() {
         return money;
+    }
+
+    public void orderCredit(int amount) {
+        credit += amount;
+    }
+
+    private void creditCheck() {
+
     }
 }
