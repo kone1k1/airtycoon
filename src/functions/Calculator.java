@@ -13,7 +13,8 @@ import elements.Airport;
  * @author mastercs
  */
 public class Calculator {
-     private final static double EARTHRADIUS = 6371000;
+
+    private final static double EARTHRADIUS = 6371000;
 
     public static int calcDistance(Airport a, Airport b) {
 
@@ -33,5 +34,5 @@ public class Calculator {
         short time = (short) (distance / plane.getSpeed());
         time *= 1.03;
         return time;
-    } 
+    }
 }

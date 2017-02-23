@@ -5,8 +5,6 @@
  */
 package gui;
 
-import elements.*;
-import functions.xml_reader;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
