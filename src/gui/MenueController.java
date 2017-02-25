@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
@@ -22,51 +23,43 @@ import javafx.scene.control.TextField;
  * @author mastercs
  */
 public class MenueController implements Initializable {
-
+    
+    private Air_tyconn application;
     private final xml_reader xml = new xml_reader();
-
+    
     private Player[] playerlist;
-
+    
     @FXML
     TextField txtPlayername;
-
+    
     @FXML
     ListView lstSaves;
-
-    ObservableList<Player> savegame;
-
+    
+    public void setApp(Air_tyconn application) {
+        this.application = application;
+        lstSaves.setItems(application.loadSavegames());
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        loadPlayers();
-
+        
     }
-
+    
     @FXML
-    private void newGame() {
+    private void newGame(ActionEvent event) {
         if (txtPlayername.getText().length() > 0) {
-            Player pl = new Player(txtPlayername.getText());
+            application.gotoGameinterface(txtPlayername.getText());
         }
     }
-
+    
     @FXML
     private void loadGame() {
-        try {
-            Player loadedPlayer = (Player) lstSaves.getSelectionModel().getSelectedItem();
-            System.out.println(loadedPlayer.toString());
-        } catch (Exception e) {
-
-        }
+        application.loadGame((Player) lstSaves.getSelectionModel().getSelectedItem());
     }
-
-    private void loadPlayers() {
-        playerlist = new Player[xml.getPlayers().length];
-        System.arraycopy(xml.getPlayers(), 0, playerlist, 0, xml.getPlayers().length);
-        savegame = FXCollections.observableArrayList(playerlist);
-        lstSaves.setItems(savegame);
-    }
-
+    
     @FXML
     private void exitProg() {
         System.exit(0);
     }
+    
 }

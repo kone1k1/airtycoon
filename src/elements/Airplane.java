@@ -21,12 +21,13 @@ public class Airplane {
     private final int price;
 
     private short max_range;
-    private short pax = 4;              // Minedstbesatzung für den Flug
+    private short pax = 4;
     private short max_pax;
-    private short fuel = 1000;          // Minedstbetankung bei kauf
+    private short fuel = 1000;
     private short max_fuel;
-    private byte repearstate = 127;           // Auslieferungszustand 0 == Toalverlust
-    private int flightdistance = 0;     // Auslieferungszustand
+    private byte repearstate = 127;
+    private int flightdistance = 0;
+
     private Airport position;
 
     public Airplane(byte id, String manufacturer, String type, String textinfo, short speed, short max_range, short max_pax, short max_fuel, int price, Airport position) {
