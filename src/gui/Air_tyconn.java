@@ -51,8 +51,8 @@ public class Air_tyconn extends Application {
 
     public void gotoGameinterface(String name) {
         try {
-            MenueController mainMenu = (MenueController) replaceSceneContent("menue.fxml");
-            mainMenu.setApp(this);
+            GameInterfaceController gameInterface = (GameInterfaceController) replaceSceneContent("GameInterface.fxml");
+            gameInterface.setApp(this);
         } catch (Exception ex) {
             Logger.getLogger(Air_tyconn.class.getName()).log(Level.SEVERE, null, ex);
         }
