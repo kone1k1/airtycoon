@@ -7,7 +7,12 @@ package gui;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.Slider;
+import javafx.scene.control.TextArea;
 
 /**
  * FXML Controller class
@@ -16,10 +21,26 @@ import javafx.fxml.Initializable;
  */
 public class GameInterfaceController implements Initializable {
 
-    private Air_tyconn application;
+    private Air_Tycoon application;
 
-    public void setApp(Air_tyconn application) {
+    @FXML
+    ListView fleetList;
+
+    @FXML
+    TextArea txtPlaneInfo;
+
+    @FXML
+    Label lblPlayerName;
+
+    @FXML
+    Label lblPlayerBank;
+
+    @FXML
+    Slider sldCredit;
+
+    public void setApp(Air_Tycoon application) {
         this.application = application;
+        updateInterface();
     }
 
     @Override
@@ -27,4 +48,8 @@ public class GameInterfaceController implements Initializable {
         // TODO
     }
 
+    private void updateInterface() {
+        lblPlayerName.setText(application.getPlayer().getName());
+        lblPlayerBank.setText(Integer.toString(application.getPlayer().getAccount().getMoney()));
+    }
 }

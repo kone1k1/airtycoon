@@ -24,10 +24,11 @@ import javafx.scene.layout.AnchorPane;
  *
  * @author mastercs
  */
-public class Air_tyconn extends Application {
+public class Air_Tycoon extends Application {
 
     private Stage stage;
     private final xml_reader xml = new xml_reader();
+    private Player player;
 
     public static void main(String[] args) {
         //Ladeabschnitt
@@ -44,7 +45,7 @@ public class Air_tyconn extends Application {
             gotoMainmenu();
             primaryStage.show();
         } catch (Exception ex) {
-            Logger.getLogger(Air_tyconn.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Air_Tycoon.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -52,9 +53,10 @@ public class Air_tyconn extends Application {
     public void gotoGameinterface(String name) {
         try {
             GameInterfaceController gameInterface = (GameInterfaceController) replaceSceneContent("GameInterface.fxml");
+            this.player = new Player(name);
             gameInterface.setApp(this);
         } catch (Exception ex) {
-            Logger.getLogger(Air_tyconn.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Air_Tycoon.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -63,22 +65,22 @@ public class Air_tyconn extends Application {
             MenueController mainMenu = (MenueController) replaceSceneContent("menue.fxml");
             mainMenu.setApp(this);
         } catch (Exception ex) {
-            Logger.getLogger(Air_tyconn.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Air_Tycoon.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     private Initializable replaceSceneContent(String fxml) throws Exception {
         FXMLLoader loader = new FXMLLoader();
-        InputStream in = Air_tyconn.class.getResourceAsStream(fxml);
+        InputStream in = Air_Tycoon.class.getResourceAsStream(fxml);
         loader.setBuilderFactory(new JavaFXBuilderFactory());
-        loader.setLocation(Air_tyconn.class.getResource(fxml));
+        loader.setLocation(Air_Tycoon.class.getResource(fxml));
         AnchorPane page;
         try {
             page = (AnchorPane) loader.load(in);
         } finally {
             in.close();
         }
-        Scene scene = new Scene(page, 800, 600);
+        Scene scene = new Scene(page);
         stage.setScene(scene);
         stage.sizeToScene();
         return (Initializable) loader.getController();
@@ -99,4 +101,9 @@ public class Air_tyconn extends Application {
         }
 
     }
+
+    public Player getPlayer() {
+        return player;
+    }
+
 }

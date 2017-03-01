@@ -22,7 +22,7 @@ import javafx.scene.control.TextField;
  */
 public class MenueController implements Initializable {
 
-    private Air_tyconn application;
+    private Air_Tycoon application;
     private final xml_reader xml = new xml_reader();
 
     @FXML
@@ -31,7 +31,7 @@ public class MenueController implements Initializable {
     @FXML
     ListView lstSaves;
 
-    public void setApp(Air_tyconn application) {
+    public void setApp(Air_Tycoon application) {
         this.application = application;
         lstSaves.setItems(application.loadSavegames());
     }

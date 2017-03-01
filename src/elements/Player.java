@@ -91,6 +91,10 @@ public class Player {
         return fleet[index];
     }
 
+    public String getName() {
+        return name;
+    }
+
     /**
      * Für erstmaliges Setzen eines Flugzeuges an 1. Stelle
      *
