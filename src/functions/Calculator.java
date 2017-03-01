@@ -35,4 +35,22 @@ public class Calculator {
         time *= 1.03;
         return time;
     }
+
+    /**
+     *
+     * @param maxPax
+     * @param costIndex je höher der Wert desto geringer muss der Preis sein
+     * damit noch Personen mitfliegen
+     * @param price
+     * @return
+     */
+    public static short passangerAmount(short maxPax, byte costIndex, short price) {
+        short calcPassanger = (short) (maxPax - (costIndex * price));
+        if (calcPassanger < 0) {
+            calcPassanger = 0;
+        } else if (calcPassanger > maxPax) {
+            calcPassanger = maxPax;
+        }
+        return calcPassanger;
+    }
 }
