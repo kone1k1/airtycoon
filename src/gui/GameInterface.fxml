@@ -98,7 +98,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <ProgressBar prefHeight="25.0" prefWidth="444.0" progress="0.1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <ProgressBar fx:id="pbFuel" prefHeight="25.0" prefWidth="444.0" progress="0.1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label text="Tankfüllung:" GridPane.rowIndex="1">
                                  <font>
                                     <Font size="18.0" />
@@ -119,11 +119,11 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <TextArea editable="false" prefHeight="126.0" prefWidth="447.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                              <ProgressBar prefHeight="25.0" prefWidth="444.0" progress="0.63" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextArea fx:id="txtPlaneInfo" editable="false" prefHeight="126.0" prefWidth="447.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <ProgressBar fx:id="pbRepearState" prefHeight="25.0" prefWidth="444.0" progress="0.63" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <Button mnemonicParsing="false" onAction="#sellPlane" prefHeight="42.0" prefWidth="175.0" text="Flugzeug verkaufen" GridPane.rowIndex="7" />
                               <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="175.0" text="Flugzeug warten" GridPane.rowIndex="6" />
-                              <Label text="Boing 737-800" GridPane.columnIndex="1">
+                              <Label fx:id="lblPlaneType" text="Boing 737-800" GridPane.columnIndex="1">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
@@ -134,12 +134,17 @@
                                  </font>
                               </Label>
                               <Slider fx:id="sldFuel" majorTickUnit="10000.0" max="40000.0" minorTickCount="1" prefHeight="55.0" prefWidth="229.0" showTickLabels="true" showTickMarks="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                              <Label text="5000 km" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                              <Label fx:id="lblKmCount" text="5000 km" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Label>
                               <Button mnemonicParsing="false" onAction="#refuelPlane" prefHeight="42.0" prefWidth="175.0" text="Flugzeug betanken" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                              <Label text="Betankung:" GridPane.rowIndex="5">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </GridPane>
                      </children>

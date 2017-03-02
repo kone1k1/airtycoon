@@ -117,6 +117,14 @@ public class Airplane implements Cloneable {
         return id;
     }
 
+    public int getFlightdistance() {
+        return flightdistance;
+    }
+
+    public String getTextinfo() {
+        return textinfo;
+    }
+
     public short getSpeed() {
         return speed;
     }

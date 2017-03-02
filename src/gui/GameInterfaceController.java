@@ -45,6 +45,12 @@ public class GameInterfaceController implements Initializable {
     Label lblCredit;
 
     @FXML
+    Label lblPlaneType;
+
+    @FXML
+    Label lblKmCount;
+
+    @FXML
     Slider sldCredit;
 
     @FXML
@@ -63,11 +69,9 @@ public class GameInterfaceController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        // ListView der Flotte des Spieler
         lstFleet.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
-            if (lstFleet.getSelectionModel().getSelectedItem() != null) {
-                sldFuel.setMax(application.getPlayer().getAirplane(lstFleet.getSelectionModel().getSelectedIndex()).getMaxFuel());
-                sldFuel.setValue(application.getPlayer().getAirplane(lstFleet.getSelectionModel().getSelectedIndex()).getFuel());
-            }
+            updateFleetInterface();
         });
     }
 
@@ -79,6 +83,18 @@ public class GameInterfaceController implements Initializable {
         lstPlanes.getItems().clear();
         lstFleet.setItems(application.loadFleet());
         lstPlanes.setItems(application.loadXmlAirplanes());
+    }
+
+    private void updateFleetInterface() {
+        if (lstFleet.getSelectionModel().getSelectedItem() != null) {
+            lblPlaneType.setText(application.getPlayer().getAirplane(lstFleet.getSelectionModel().getSelectedIndex()).getType());
+            lblKmCount.setText(NumberFormat.getInstance().format(application.getPlayer().getAirplane(lstFleet.getSelectionModel().getSelectedIndex()).getFlightdistance()) + " km");
+            txtPlaneInfo.setText(application.getPlayer().getAirplane(lstFleet.getSelectionModel().getSelectedIndex()).getTextinfo());
+            sldFuel.setMax(application.getPlayer().getAirplane(lstFleet.getSelectionModel().getSelectedIndex()).getMaxFuel());
+            sldFuel.setValue(application.getPlayer().getAirplane(lstFleet.getSelectionModel().getSelectedIndex()).getFuel());
+            pbRepearState.setProgress(application.getPlayer().getAirplane(lstFleet.getSelectionModel().getSelectedIndex()).getRepearstate() / 127);
+            pbFuel.setProgress(sldFuel.getValue() / sldFuel.getMax());
+        }
     }
 
     @FXML
@@ -107,7 +123,7 @@ public class GameInterfaceController implements Initializable {
     private void refuelPlane() {
         if (lstFleet.getSelectionModel().getSelectedItem() != null) {
             application.getPlayer().getAirplane(lstFleet.getSelectionModel().getSelectedIndex()).setFuel((short) sldFuel.getValue());
-
+            updateFleetInterface();
         }
 
     }
