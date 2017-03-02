@@ -8,11 +8,13 @@ and open the template in the editor.
     <player>
         <id>0</id>
         <name>mastercs</name>
-        <money>2000000</money>
+        <money>1500000</money>
+        <fleet>0</fleet>
     </player>
     <player>
         <id>1</id>
         <name>jg</name>
         <money>2000000</money>
+         <fleet>2</fleet>
     </player>       
 </players>

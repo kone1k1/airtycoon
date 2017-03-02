@@ -5,8 +5,8 @@
  */
 package elements;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -18,7 +18,9 @@ public class Player {
     private final String name;
 
     private final Bank account;
-    private Airplane[] fleet = new Airplane[20]; //flotte maximal 20
+    private List<Airplane> fleet = new ArrayList<>();
+
+    ;
 
     /**
      * Laden eines Spielstandes
@@ -26,14 +28,13 @@ public class Player {
      * @param id Einmalige Ident Nummer für den Spieler
      * @param name Name des Spieler
      * @param account Bank des Spielers
-     * @param fleet Flugzeugflotte des Spielers
      */
-    public Player(byte id, String name, Bank account, Airplane[] fleet) {
+    public Player(byte id, String name, Bank account, List<Airplane> fleet) {
 
         this.id = id;
         this.name = name;
         this.account = account;
-        this.fleet = fleet;
+        this.fleet.addAll(0, fleet);
     }
 
     /**
@@ -42,6 +43,7 @@ public class Player {
      * @param name Name des Spieler
      */
     public Player(String name) {
+
         id = 0;
         this.name = name;
         account = new Bank();
@@ -51,31 +53,17 @@ public class Player {
     public boolean buy_plane(Airplane plane) {
 
         if (account.transaction(plane.getPrice())) {
-            for (int i = 0; i < fleet.length - 1; i++) {
-                if (fleet[i] == null) {
-                    try {
-                        fleet[i] = (Airplane) plane.clone();
-                    } catch (CloneNotSupportedException ex) {
-                        Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    break;
-                }
-            }
+            fleet.add(plane);
             return true;
         } else {
             return false;
         }
     }
 
-    /**
-     *
-     * @param plane_id Flugzeugposition im Array
-     * @deprecated fixwert muss noch angepasst werden
-     */
-    public void sell_plane(int plane_id) {
+    public void sell_plane(Airplane plane) {
 
-        account.deposit((int) (fleet[plane_id].getPrice() * 0.3));      //später fixwert du wartungsindex ersetzen um angemessenen wert zu finden  
-        fleet[plane_id] = null;
+        account.deposit((int) (plane.getPrice() * 0.3));
+        fleet.remove(fleet.lastIndexOf(plane));
     }
 
     @Override
@@ -83,8 +71,7 @@ public class Player {
         return "ID: " + id + System.lineSeparator() + "Name: " + name + System.lineSeparator() + "Bankguthaben: " + account.getMoney();
     }
 
-    public Airplane[] getFleet() {
-
+    public List<Airplane> getFleet() {
         return fleet;
     }
 
@@ -95,21 +82,15 @@ public class Player {
 
     public Airplane getAirplane(int index) {
 
-        return fleet[index];
+        return fleet.get(index);
     }
 
     public String getName() {
         return name;
     }
 
-    /**
-     * Für erstmaliges Setzen eines Flugzeuges an 1. Stelle
-     *
-     * @param plane
-     */
-    public void setFleet(Airplane plane) {
-
-        fleet[0] = plane;
+    public byte getId() {
+        return id;
     }
 
 }

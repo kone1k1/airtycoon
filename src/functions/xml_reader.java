@@ -8,6 +8,8 @@ package functions;
 import elements.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -23,9 +25,9 @@ import org.xml.sax.SAXException;
  */
 public class xml_reader {
 
-    Airport[] airports;
-    Airplane[] airplanes;
-    Player[] players;
+    private List<Airport> airports;
+    private List<Airplane> airplanes;
+    private List<Player> players;
 
     public xml_reader() {
         load_airports();
@@ -39,6 +41,7 @@ public class xml_reader {
         float lat;
         float lng;
         byte costindex;
+        airports = new ArrayList<>();
 
         try {
             File stocks = new File("src/core/airports.xml");
@@ -47,7 +50,7 @@ public class xml_reader {
             Document doc = dBuilder.parse(stocks);
             doc.getDocumentElement().normalize();
             NodeList nodes = doc.getElementsByTagName("airport");
-            airports = new Airport[nodes.getLength()];
+
             for (int i = 0; i < nodes.getLength(); i++) {
 
                 Node node = nodes.item(i);
@@ -60,7 +63,7 @@ public class xml_reader {
                     lat = Float.parseFloat(getValue("lat", element));
                     lng = Float.parseFloat(getValue("lng", element));
                     costindex = Byte.parseByte(getValue("costindex", element));
-                    airports[i] = new Airport(id, name, lat, lng, costindex);
+                    airports.add(new Airport(id, name, lat, lng, costindex));
                 }
             }
         } catch (IOException | NumberFormatException | ParserConfigurationException | SAXException ex) {
@@ -78,6 +81,7 @@ public class xml_reader {
         short max_range;
         short max_pax;
         short max_fuel;
+        airplanes = new ArrayList<>();
 
         try {
             File stocks = new File("src/core/aircrafts.xml");
@@ -86,7 +90,7 @@ public class xml_reader {
             Document doc = dBuilder.parse(stocks);
             doc.getDocumentElement().normalize();
             NodeList nodes = doc.getElementsByTagName("aircraft");
-            airplanes = new Airplane[nodes.getLength()];
+
             for (int i = 0; i < nodes.getLength(); i++) {
 
                 Node node = nodes.item(i);
@@ -103,7 +107,7 @@ public class xml_reader {
                     max_range = Short.parseShort(getValue("max_range", element));
                     max_pax = Short.parseShort(getValue("max_pax", element));
                     max_fuel = Short.parseShort(getValue("max_fuel", element));
-                    airplanes[i] = new Airplane(id, manufacturer, type, textinfo, speed, max_range, max_pax, max_fuel, price, airports[0]);
+                    airplanes.add(new Airplane(id, manufacturer, type, textinfo, speed, max_range, max_pax, max_fuel, price, airports.get(0)));
                 }
             }
         } catch (IOException | NumberFormatException | ParserConfigurationException | SAXException ex) {
@@ -115,6 +119,7 @@ public class xml_reader {
         byte id;
         String name;
         int money;
+        players = new ArrayList<>();
 
         try {
             File stocks = new File("src/core/players.xml");
@@ -123,9 +128,8 @@ public class xml_reader {
             Document doc = dBuilder.parse(stocks);
             doc.getDocumentElement().normalize();
             NodeList nodes = doc.getElementsByTagName("player");
-            players = new Player[nodes.getLength()];
             for (int i = 0; i < nodes.getLength(); i++) {
-
+                List<Airplane> playerAirplanes = new ArrayList<>();
                 Node node = nodes.item(i);
 
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
@@ -134,7 +138,9 @@ public class xml_reader {
                     id = Byte.parseByte(getValue("id", element));
                     name = getValue("name", element);
                     money = Integer.parseInt(getValue("money", element));
-                    players[i] = new Player(id, name, new Bank(id, money), airplanes);
+                    int fleetIndex = Integer.parseInt(getValue("fleet", element));
+                    playerAirplanes.add(airplanes.get(fleetIndex));
+                    players.add(new Player(id, name, new Bank(id, money), playerAirplanes));
 
                 }
             }
@@ -149,15 +155,15 @@ public class xml_reader {
         return node.getNodeValue();
     }
 
-    public Player[] getPlayers() {
+    public List<Player> getPlayers() {
         return players;
     }
 
-    public Airplane[] getAirplanes() {
+    public List<Airplane> getAirplanes() {
         return airplanes;
     }
 
-    public Airport[] getAirports() {
+    public List<Airport> getAirports() {
         return airports;
     }
 

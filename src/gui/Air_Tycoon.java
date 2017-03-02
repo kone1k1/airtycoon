@@ -54,7 +54,10 @@ public class Air_Tycoon extends Application {
     public void gotoGameinterface(String name) {
         try {
             GameInterfaceController gameInterface = (GameInterfaceController) replaceSceneContent("GameInterface.fxml");
-            this.player = new Player(name);
+            //prüfen ob schon ein Spieler geladen wurde
+            if (this.player == null) {
+                this.player = new Player(name);
+            }
             gameInterface.setApp(this);
         } catch (Exception ex) {
             Logger.getLogger(Air_Tycoon.class.getName()).log(Level.SEVERE, null, ex);
@@ -88,30 +91,30 @@ public class Air_Tycoon extends Application {
     }
 
     public ObservableList loadSavegames() {
+
         ObservableList<Player> savegame;
-        Player[] playerlist = new Player[xml.getPlayers().length];
-        System.arraycopy(xml.getPlayers(), 0, playerlist, 0, xml.getPlayers().length);
-        savegame = FXCollections.observableArrayList(playerlist);
+        savegame = FXCollections.observableArrayList(xml.getPlayers());
         return savegame;
     }
 
     public ObservableList loadFleet() {
+
         ObservableList<Airplane> fleet;
         fleet = FXCollections.observableArrayList(player.getFleet());
         return fleet;
     }
 
     public ObservableList loadXmlAirplanes() {
+
         ObservableList<Airplane> airplanes;
         airplanes = FXCollections.observableArrayList(xml.getAirplanes());
         return airplanes;
     }
 
     public void loadGame(Player pl) {
-        try {
-            System.out.println(pl.toString());
-        } catch (Exception e) {
-        }
+
+        this.player = pl;
+        gotoGameinterface(this.player.getName());
 
     }
 
