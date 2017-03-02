@@ -94,6 +94,13 @@ public class GameInterfaceController implements Initializable {
             sldFuel.setValue(application.getPlayer().getAirplane(lstFleet.getSelectionModel().getSelectedIndex()).getFuel());
             pbRepearState.setProgress(application.getPlayer().getAirplane(lstFleet.getSelectionModel().getSelectedIndex()).getRepearstate() / 127);
             pbFuel.setProgress(sldFuel.getValue() / sldFuel.getMax());
+        }else{
+        lblPlaneType.setText("");
+        lblKmCount.setText("");
+        txtPlaneInfo.setText("");
+        sldFuel.setValue(0);
+        pbRepearState.setProgress(0);
+        pbFuel.setProgress(0);
         }
     }
 
@@ -128,4 +135,12 @@ public class GameInterfaceController implements Initializable {
 
     }
 
+    @FXML
+    private void repairPlane() {
+        if (lstFleet.getSelectionModel().getSelectedItem() != null) {
+            application.getPlayer().getAirplane(lstFleet.getSelectionModel().getSelectedIndex()).repair();
+            updateFleetInterface();
+        }
+
+    }
 }
