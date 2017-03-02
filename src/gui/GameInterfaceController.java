@@ -48,6 +48,9 @@ public class GameInterfaceController implements Initializable {
     Label lblPlaneType;
 
     @FXML
+    Label lblPlaneManufactor;
+
+    @FXML
     Label lblKmCount;
 
     @FXML
@@ -87,6 +90,7 @@ public class GameInterfaceController implements Initializable {
 
     private void updateFleetInterface() {
         if (lstFleet.getSelectionModel().getSelectedItem() != null) {
+            lblPlaneManufactor.setText(application.getPlayer().getAirplane(lstFleet.getSelectionModel().getSelectedIndex()).getManufacturer());
             lblPlaneType.setText(application.getPlayer().getAirplane(lstFleet.getSelectionModel().getSelectedIndex()).getType());
             lblKmCount.setText(NumberFormat.getInstance().format(application.getPlayer().getAirplane(lstFleet.getSelectionModel().getSelectedIndex()).getFlightdistance()) + " km");
             txtPlaneInfo.setText(application.getPlayer().getAirplane(lstFleet.getSelectionModel().getSelectedIndex()).getTextinfo());
@@ -95,6 +99,7 @@ public class GameInterfaceController implements Initializable {
             pbRepearState.setProgress(application.getPlayer().getAirplane(lstFleet.getSelectionModel().getSelectedIndex()).getRepearstate() / 127);
             pbFuel.setProgress(sldFuel.getValue() / sldFuel.getMax());
         } else {
+            lblPlaneManufactor.setText("");
             lblPlaneType.setText("");
             lblKmCount.setText("");
             txtPlaneInfo.setText("");
@@ -132,7 +137,6 @@ public class GameInterfaceController implements Initializable {
             application.getPlayer().getAirplane(lstFleet.getSelectionModel().getSelectedIndex()).setFuel((short) sldFuel.getValue());
             updateFleetInterface();
         }
-
     }
 
     @FXML

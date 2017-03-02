@@ -36,7 +36,6 @@ public class xml_reader {
     }
 
     private void load_airports() {
-        byte id;
         String name;
         float lat;
         float lng;
@@ -58,12 +57,11 @@ public class xml_reader {
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
 
                     Element element = (Element) node;
-                    id = Byte.parseByte(getValue("id", element));
                     name = getValue("name", element);
                     lat = Float.parseFloat(getValue("lat", element));
                     lng = Float.parseFloat(getValue("lng", element));
                     costindex = Byte.parseByte(getValue("costindex", element));
-                    airports.add(new Airport(id, name, lat, lng, costindex));
+                    airports.add(new Airport((byte) i, name, lat, lng, costindex));
                 }
             }
         } catch (IOException | NumberFormatException | ParserConfigurationException | SAXException ex) {
@@ -72,7 +70,6 @@ public class xml_reader {
     }
 
     private void load_airplanes() {
-        byte id;
         String manufacturer;
         String type;
         String textinfo;
@@ -98,7 +95,6 @@ public class xml_reader {
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
 
                     Element element = (Element) node;
-                    id = Byte.parseByte(getValue("id", element));
                     manufacturer = getValue("manufacturer", element);
                     type = getValue("type", element);
                     textinfo = getValue("textinfo", element);
@@ -107,7 +103,7 @@ public class xml_reader {
                     max_range = Short.parseShort(getValue("max_range", element));
                     max_pax = Short.parseShort(getValue("max_pax", element));
                     max_fuel = Short.parseShort(getValue("max_fuel", element));
-                    airplanes.add(new Airplane(id, manufacturer, type, textinfo, speed, max_range, max_pax, max_fuel, price, airports.get(0)));
+                    airplanes.add(new Airplane((byte) i, manufacturer, type, textinfo, speed, max_range, max_pax, max_fuel, price, airports.get(0)));
                 }
             }
         } catch (IOException | NumberFormatException | ParserConfigurationException | SAXException ex) {
@@ -116,7 +112,7 @@ public class xml_reader {
     }
 
     private void load_players() {
-        byte id;
+
         String name;
         int money;
         players = new ArrayList<>();
@@ -135,12 +131,11 @@ public class xml_reader {
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
 
                     Element element = (Element) node;
-                    id = Byte.parseByte(getValue("id", element));
                     name = getValue("name", element);
                     money = Integer.parseInt(getValue("money", element));
                     int fleetIndex = Integer.parseInt(getValue("fleet", element));
                     playerAirplanes.add(airplanes.get(fleetIndex));
-                    players.add(new Player(id, name, new Bank(id, money), playerAirplanes));
+                    players.add(new Player((byte) i, name, new Bank((byte) i, money), playerAirplanes));
 
                 }
             }

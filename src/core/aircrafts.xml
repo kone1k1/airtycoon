@@ -8,34 +8,31 @@ and open the template in the editor.
 
 <aircrafts>
     <aircraft>
-        <id>0</id>
         <manufacturer>Boing</manufacturer>
         <type>737-400</type>
         <max_pax>188</max_pax>
-        <textinfo>Eine Boing 737-400 ist ein Flugzeug aus dem Jahr ....</textinfo>
-        <max_range>5186</max_range>
+        <textinfo>Die Boeing 737 des US-amerikanischen Flugzeugherstellers Boeing ist die weltweit meistgebaute Familie strahlgetriebener Verkehrsflugzeuge. Der als Schmalrumpfflugzeug ausgelegte Typ wird mittlerweile in der dritten Generation gefertigt und hat über die Zeit seine äußere Erscheinung kaum geändert. </textinfo>
+        <max_range>5000</max_range>
         <price>15000000</price>
         <speed>907</speed>
         <max_fuel>16084</max_fuel> 
     </aircraft>
     <aircraft>
-        <id>1</id>
         <manufacturer>Boing</manufacturer>
         <type>727-200</type>
         <max_pax>189</max_pax>
-        <textinfo>Eine Boing 727-400 ist ein Flugzeug aus dem Jahr ....</textinfo>
+        <textinfo>Die Boeing 727 ist ein dreistrahliges Verkehrsflugzeug des amerikanischen Flugzeugherstellers Boeing in Tiefdeckerauslegung für den Passagier- und Frachttransport auf Mittel- und Kurzstrecken. Mit 1.832 hergestellten Exemplaren war die Boeing 727 eine Zeit lang das meistgebaute Düsenverkehrsflugzeug der Welt, bis sie darin von der Boeing 737 abgelöst wurde.</textinfo>
         <max_range>4020</max_range>
         <price>15000000</price>
         <speed>965</speed>
         <max_fuel>16084</max_fuel> 
     </aircraft>
     <aircraft>
-        <id>2</id>
         <manufacturer>Airbus</manufacturer>
         <type>A320-200</type>
         <max_pax>180</max_pax>
-        <textinfo>Eine Boing 727-400 ist ein Flugzeug aus dem Jahr ....</textinfo>
-        <max_range>4020</max_range>
+        <textinfo>Als Airbus-A320-Familie werden die vier Schmalrumpfflugzeug-Baureihen des Flugzeugherstellers Airbus für die Kurz- und Mittelstrecke bezeichnet. Die A320 war dabei als erste Variante das Basismodell der als Tiefdecker ausgeführten A320-Familie.</textinfo>
+        <max_range>6150</max_range>
         <price>2000000</price>
         <speed>871</speed>
         <max_fuel>30000</max_fuel> 

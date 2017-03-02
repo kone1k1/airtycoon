@@ -65,16 +65,6 @@ public class Airplane implements Cloneable {
         }
     }
 
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone(); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    /**
-     * Treibstoffverbrauch berechnen
-     *
-     */
-    @Deprecated
     private int calcFuelConsumption(double distance_nm) {
         int efuel;
 
@@ -85,17 +75,8 @@ public class Airplane implements Cloneable {
         return efuel;
     }
 
-    /**
-     * Bei einem Crash wird die Position auf NULL gesetzt um zu verdeutlichen
-     * das der Flieger ein Totalverlust ist
-     *
-     * @return
-     */
     private boolean crash_test() {
         byte result = (byte) (Math.random() * repearstate);
-        if (result == 0) {
-            position = null;
-        }
         return result == 0;
     }
 
@@ -107,6 +88,11 @@ public class Airplane implements Cloneable {
     public String toString() {
         String result = "Flugzeugtyp: " + manufacturer + " " + type + System.lineSeparator() + "Anzahl Sitze: " + max_pax + System.lineSeparator() + "Preis: " + NumberFormat.getInstance().format(price) + " €";
         return result;
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone(); //To change body of generated methods, choose Tools | Templates.
     }
 
     public short getMaxFuel() {
@@ -141,6 +127,10 @@ public class Airplane implements Cloneable {
         return fuel;
     }
 
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
     public byte getRepearstate() {
         return repearstate;
     }
@@ -153,7 +143,7 @@ public class Airplane implements Cloneable {
         this.fuel = fuel;
     }
 
-//bereich für upgrades
+    //bereich für upgrades
     public void setMaxFuel(short maxfuel) {
         this.max_fuel = maxfuel;
     }

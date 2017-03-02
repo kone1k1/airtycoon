@@ -7,6 +7,8 @@ package elements;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,14 +22,13 @@ public class Player {
     private final Bank account;
     private List<Airplane> fleet = new ArrayList<>();
 
-    ;
-
     /**
      * Laden eines Spielstandes
      *
      * @param id Einmalige Ident Nummer für den Spieler
      * @param name Name des Spieler
      * @param account Bank des Spielers
+     * @param fleet
      */
     public Player(byte id, String name, Bank account, List<Airplane> fleet) {
 
@@ -44,20 +45,30 @@ public class Player {
      */
     public Player(String name) {
 
-        id = 0;
+        this.id = 0;
         this.name = name;
-        account = new Bank();
+        this.account = new Bank();
 
     }
 
-    public boolean buy_plane(Airplane plane) {
+    public void buy_plane(Airplane plane) {
 
         if (account.transaction(plane.getPrice())) {
-            fleet.add(plane);
-            return true;
-        } else {
-            return false;
+            try {
+                fleet.add((Airplane) plane.clone());
+            } catch (CloneNotSupportedException ex) {
+                Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         }
+    }
+
+    public void repair(Airplane plane) {
+
+        if (account.transaction((int) (plane.getPrice() * 0.1))) {
+            plane.repair();
+        }
+
     }
 
     public void sell_plane(Airplane plane) {
