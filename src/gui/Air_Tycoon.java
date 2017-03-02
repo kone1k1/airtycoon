@@ -5,6 +5,7 @@
  */
 package gui;
 
+import elements.Airplane;
 import elements.Player;
 import functions.xml_reader;
 import java.io.InputStream;
@@ -92,6 +93,18 @@ public class Air_Tycoon extends Application {
         System.arraycopy(xml.getPlayers(), 0, playerlist, 0, xml.getPlayers().length);
         savegame = FXCollections.observableArrayList(playerlist);
         return savegame;
+    }
+
+    public ObservableList loadFleet() {
+        ObservableList<Airplane> fleet;
+        fleet = FXCollections.observableArrayList(player.getFleet());
+        return fleet;
+    }
+
+    public ObservableList loadXmlAirplanes() {
+        ObservableList<Airplane> airplanes;
+        airplanes = FXCollections.observableArrayList(xml.getAirplanes());
+        return airplanes;
     }
 
     public void loadGame(Player pl) {

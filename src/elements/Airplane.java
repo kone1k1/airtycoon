@@ -6,12 +6,13 @@
 package elements;
 
 import functions.Calculator;
+import java.text.NumberFormat;
 
 /**
  *
  * @author mastercs
  */
-public class Airplane {
+public class Airplane implements Cloneable {
 
     private final byte id;
     private final String manufacturer;
@@ -64,23 +65,9 @@ public class Airplane {
         }
     }
 
-    /**
-     * Aircraft betanken
-     *
-     * @param amount ist die Menge an Treibstoff, die getankt werden soll. Muss
-     * schon vorher festgestellt werden was der maixmale Tankzustand nicht
-     * erreicht wird
-     * @return true, falls Betankung erfolgreich war, ansonsten false
-     */
-    public boolean refuel(int amount) {
-        if (amount >= 0) {
-            fuel += amount;
-            return true;
-        } else {
-            fuel -= Math.abs(amount);
-            return false;
-        }
-
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone(); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -118,7 +105,7 @@ public class Airplane {
 
     @Override
     public String toString() {
-        String result = "Flugzeugtyp: " + manufacturer + " " + type + System.lineSeparator() + "Anzahl Sitze: " + max_pax + System.lineSeparator() + "Aktuelle Position: " + position.getName();
+        String result = "Flugzeugtyp: " + manufacturer + " " + type + System.lineSeparator() + "Anzahl Sitze: " + max_pax + System.lineSeparator() + "Preis: " + NumberFormat.getInstance().format(price) + " €";
         return result;
     }
 
@@ -152,6 +139,10 @@ public class Airplane {
 
     public void setPax(short pax) {
         this.pax = pax;
+    }
+
+    public void setFuel(short fuel) {
+        this.fuel = fuel;
     }
 
 //bereich für upgrades

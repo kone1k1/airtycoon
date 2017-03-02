@@ -36,7 +36,7 @@ and open the template in the editor.
         <max_pax>180</max_pax>
         <textinfo>Eine Boing 727-400 ist ein Flugzeug aus dem Jahr ....</textinfo>
         <max_range>4020</max_range>
-        <price>20000000</price>
+        <price>2000000</price>
         <speed>871</speed>
         <max_fuel>30000</max_fuel> 
     </aircraft>

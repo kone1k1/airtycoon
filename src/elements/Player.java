@@ -5,6 +5,9 @@
  */
 package elements;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author mastercs
@@ -42,6 +45,7 @@ public class Player {
         id = 0;
         this.name = name;
         account = new Bank();
+
     }
 
     public boolean buy_plane(Airplane plane) {
@@ -49,7 +53,11 @@ public class Player {
         if (account.transaction(plane.getPrice())) {
             for (int i = 0; i < fleet.length - 1; i++) {
                 if (fleet[i] == null) {
-                    fleet[i] = plane;
+                    try {
+                        fleet[i] = (Airplane) plane.clone();
+                    } catch (CloneNotSupportedException ex) {
+                        Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     break;
                 }
             }
@@ -64,7 +72,6 @@ public class Player {
      * @param plane_id Flugzeugposition im Array
      * @deprecated fixwert muss noch angepasst werden
      */
-    @Deprecated
     public void sell_plane(int plane_id) {
 
         account.deposit((int) (fleet[plane_id].getPrice() * 0.3));      //später fixwert du wartungsindex ersetzen um angemessenen wert zu finden  

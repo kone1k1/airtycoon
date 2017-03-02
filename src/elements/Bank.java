@@ -30,7 +30,7 @@ public class Bank {
     }
 
     public boolean transaction(int amount) {
-        if (amount < money) {
+        if (amount <= money) {
             money -= amount;
             return true;
         } else {
@@ -46,8 +46,13 @@ public class Bank {
         return money;
     }
 
+    public int getCredit() {
+        return credit;
+    }
+
     public void orderCredit(int amount) {
         credit += amount;
+        money += amount;
     }
 
     private void creditCheck() {
