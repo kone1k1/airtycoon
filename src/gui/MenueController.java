@@ -5,7 +5,7 @@
  */
 package gui;
 
-import elements.Player;
+import main.Player;
 import functions.xml_reader;
 import java.net.URL;
 import java.util.ResourceBundle;

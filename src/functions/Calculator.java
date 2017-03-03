@@ -5,8 +5,8 @@
  */
 package functions;
 
-import elements.Airplane;
-import elements.Airport;
+import main.Airplane;
+import main.Airport;
 
 /**
  *

@@ -5,7 +5,10 @@
  */
 package functions;
 
-import elements.*;
+import main.Airplane;
+import main.Airport;
+import main.Player;
+import main.Bank;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,12 +33,12 @@ public class xml_reader {
     private List<Player> players;
 
     public xml_reader() {
-        load_airports();
-        load_airplanes();
-        load_players();
+        loadAirports();
+        loadAirplanes();
+        loadPlayers();
     }
 
-    private void load_airports() {
+    private void loadAirports() {
 
         airports = new ArrayList<>();
 
@@ -67,7 +70,7 @@ public class xml_reader {
 
     }
 
-    private void load_airplanes() {
+    private void loadAirplanes() {
 
         airplanes = new ArrayList<>();
 
@@ -102,7 +105,7 @@ public class xml_reader {
 
     }
 
-    private void load_players() {
+    private void loadPlayers() {
 
         players = new ArrayList<>();
 

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package elements;
+package main;
 
 import functions.Calculator;
 import java.text.NumberFormat;

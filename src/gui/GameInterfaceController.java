@@ -5,7 +5,7 @@
  */
 package gui;
 
-import elements.Airplane;
+import main.Airplane;
 import java.net.URL;
 import java.text.NumberFormat;
 import java.util.ResourceBundle;

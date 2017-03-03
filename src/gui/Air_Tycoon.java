@@ -5,8 +5,8 @@
  */
 package gui;
 
-import elements.Airplane;
-import elements.Player;
+import main.Airplane;
+import main.Player;
 import functions.xml_reader;
 import java.io.InputStream;
 import javafx.application.Application;
