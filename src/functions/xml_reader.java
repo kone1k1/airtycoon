@@ -43,7 +43,7 @@ public class xml_reader {
         airports = new ArrayList<>();
 
         try {
-            File stocks = new File("src/core/airports.xml");
+            File stocks = new File("src/config/airports.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(stocks);
@@ -75,7 +75,7 @@ public class xml_reader {
         airplanes = new ArrayList<>();
 
         try {
-            File stocks = new File("src/core/aircrafts.xml");
+            File stocks = new File("src/config/aircrafts.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(stocks);
@@ -110,7 +110,7 @@ public class xml_reader {
         players = new ArrayList<>();
 
         try {
-            File stocks = new File("src/core/players.xml");
+            File stocks = new File("src/config/players.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(stocks);
