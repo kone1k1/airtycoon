@@ -36,10 +36,7 @@ public class xml_reader {
     }
 
     private void load_airports() {
-        String name;
-        float lat;
-        float lng;
-        byte costindex;
+
         airports = new ArrayList<>();
 
         try {
@@ -57,10 +54,11 @@ public class xml_reader {
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
 
                     Element element = (Element) node;
-                    name = getValue("name", element);
-                    lat = Float.parseFloat(getValue("lat", element));
-                    lng = Float.parseFloat(getValue("lng", element));
-                    costindex = Byte.parseByte(getValue("costindex", element));
+                    String name = getValue("name", element);
+                    float lat = Float.parseFloat(getValue("lat", element));
+                    float lng = Float.parseFloat(getValue("lng", element));
+                    byte costindex = Byte.parseByte(getValue("costindex", element));
+
                     airports.add(new Airport((byte) i, name, lat, lng, costindex));
                 }
             }
@@ -70,14 +68,7 @@ public class xml_reader {
     }
 
     private void load_airplanes() {
-        String manufacturer;
-        String type;
-        String textinfo;
-        short speed;
-        int price;
-        short max_range;
-        short max_pax;
-        short max_fuel;
+
         airplanes = new ArrayList<>();
 
         try {
@@ -95,14 +86,14 @@ public class xml_reader {
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
 
                     Element element = (Element) node;
-                    manufacturer = getValue("manufacturer", element);
-                    type = getValue("type", element);
-                    textinfo = getValue("textinfo", element);
-                    speed = Short.parseShort(getValue("speed", element));
-                    price = Integer.parseInt(getValue("price", element));
-                    max_range = Short.parseShort(getValue("max_range", element));
-                    max_pax = Short.parseShort(getValue("max_pax", element));
-                    max_fuel = Short.parseShort(getValue("max_fuel", element));
+                    String manufacturer = getValue("manufacturer", element);
+                    String type = getValue("type", element);
+                    String textinfo = getValue("textinfo", element);
+                    short speed = Short.parseShort(getValue("speed", element));
+                    int price = Integer.parseInt(getValue("price", element));
+                    short max_range = Short.parseShort(getValue("max_range", element));
+                    short max_pax = Short.parseShort(getValue("max_pax", element));
+                    short max_fuel = Short.parseShort(getValue("max_fuel", element));
                     airplanes.add(new Airplane((byte) i, manufacturer, type, textinfo, speed, max_range, max_pax, max_fuel, price, airports.get(0)));
                 }
             }
@@ -113,8 +104,6 @@ public class xml_reader {
 
     private void load_players() {
 
-        String name;
-        int money;
         players = new ArrayList<>();
 
         try {
@@ -131,8 +120,8 @@ public class xml_reader {
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
 
                     Element element = (Element) node;
-                    name = getValue("name", element);
-                    money = Integer.parseInt(getValue("money", element));
+                    String name = getValue("name", element);
+                    int money = Integer.parseInt(getValue("money", element));
                     int fleetIndex = Integer.parseInt(getValue("fleet", element));
                     playerAirplanes.add(airplanes.get(fleetIndex));
                     players.add(new Player((byte) i, name, new Bank((byte) i, money), playerAirplanes));
