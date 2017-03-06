@@ -124,7 +124,7 @@ public class GameInterfaceController implements Initializable {
             txtPlaneInfo.setText(application.getPlayer().getAirplane(lstFleet.getSelectionModel().getSelectedIndex()).getTextinfo());
             sldFuel.setMax(application.getPlayer().getAirplane(lstFleet.getSelectionModel().getSelectedIndex()).getMaxFuel());
             sldFuel.setValue(application.getPlayer().getAirplane(lstFleet.getSelectionModel().getSelectedIndex()).getFuel());
-            pbRepearState.setProgress(application.getPlayer().getAirplane(lstFleet.getSelectionModel().getSelectedIndex()).getRepearstate() / 127);
+            pbRepearState.setProgress(application.getPlayer().getAirplane(lstFleet.getSelectionModel().getSelectedIndex()).getRepearstate() / 127F);
             pbFuel.setProgress(sldFuel.getValue() / sldFuel.getMax());
         } else {
             lblPlaneManufactor.setText("");
@@ -196,6 +196,7 @@ public class GameInterfaceController implements Initializable {
         if (cbFleet.getSelectionModel().getSelectedItem() != null) {
             application.getPlayer().getAirplane(cbFleet.getSelectionModel().getSelectedIndex()).fly((Airport) cbFlightTarget.getSelectionModel().getSelectedItem());
             updateFlyInterface();
+            updateFleetInterface();
         }
 
     }

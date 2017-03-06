@@ -54,7 +54,7 @@ public class Airplane implements Cloneable {
                 position = target;
                 flightdistance += dist;
                 pax = 4;
-                repearstate -= 1;
+                repearstate--;
                 System.out.println("Das Flugzeug des Typs " + manufacturer + " " + type + " flog " + dist + " km!" + System.lineSeparator() + "Dabei verbrauchte es " + efuel + " KG Kerosin." + System.lineSeparator() + "Der Restbestand im Tank ist " + fuel + " KG Kerosin.");
             } else {
                 System.out.println("Flugdistanz zu groß oder nicht genug Kerosin!");
