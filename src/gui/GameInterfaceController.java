@@ -11,11 +11,13 @@ import java.text.NumberFormat;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
+import main.Airport;
 
 /**
  * FXML Controller class
@@ -24,7 +26,7 @@ import javafx.scene.control.TextArea;
  */
 public class GameInterfaceController implements Initializable {
 
-    private Air_Tycoon application;
+    private AirTycoon application;
 
     @FXML
     ListView lstFleet;
@@ -65,20 +67,42 @@ public class GameInterfaceController implements Initializable {
     @FXML
     Slider sldFuel;
 
-    public void setApp(Air_Tycoon application) {
+    @FXML
+    ChoiceBox cbFleet;
+
+    @FXML
+    ChoiceBox cbFlightTarget;
+
+    @FXML
+    Slider sldTicketPrice;
+
+    @FXML
+    Label lblPosition;
+
+    public void setApp(AirTycoon application) {
+
         this.application = application;
         updateInterface();
+        cbFlightTarget.setItems(application.loadXmlAirports());
+        cbFlightTarget.getSelectionModel().select(0);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         // ListView der Flotte des Spieler
         lstFleet.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
             updateFleetInterface();
         });
+
+        cbFleet.getSelectionModel().selectedItemProperty().addListener((observable) -> {
+            updateFlyInterface();
+        });
+
     }
 
     private void updateInterface() {
+
         lblPlayerName.setText(application.getPlayer().getName());
         lblPlayerBank.setText(NumberFormat.getInstance().format(application.getPlayer().getAccount().getMoney()) + " €");
         lblCredit.setText(NumberFormat.getInstance().format(application.getPlayer().getAccount().getCredit()) + " €");
@@ -86,9 +110,13 @@ public class GameInterfaceController implements Initializable {
         lstPlanes.getItems().clear();
         lstFleet.setItems(application.loadFleet());
         lstPlanes.setItems(application.loadXmlAirplanes());
+
+        // Flugbereich
+        cbFleet.setItems(application.loadFleet());
     }
 
     private void updateFleetInterface() {
+
         if (lstFleet.getSelectionModel().getSelectedItem() != null) {
             lblPlaneManufactor.setText(application.getPlayer().getAirplane(lstFleet.getSelectionModel().getSelectedIndex()).getManufacturer());
             lblPlaneType.setText(application.getPlayer().getAirplane(lstFleet.getSelectionModel().getSelectedIndex()).getType());
@@ -111,6 +139,7 @@ public class GameInterfaceController implements Initializable {
 
     @FXML
     private void buyPlane() {
+
         if (lstPlanes.getSelectionModel().getSelectedItem() != null) {
             application.getPlayer().buy_plane((Airplane) lstPlanes.getSelectionModel().getSelectedItem());
             updateInterface();
@@ -119,6 +148,7 @@ public class GameInterfaceController implements Initializable {
 
     @FXML
     private void getCredit() {
+
         application.getPlayer().getAccount().orderCredit((int) sldCredit.getValue());
         updateInterface();
     }
@@ -133,6 +163,7 @@ public class GameInterfaceController implements Initializable {
 
     @FXML
     private void refuelPlane() {
+
         if (lstFleet.getSelectionModel().getSelectedItem() != null) {
             application.getPlayer().getAirplane(lstFleet.getSelectionModel().getSelectedIndex()).setFuel((short) sldFuel.getValue());
             updateFleetInterface();
@@ -141,9 +172,30 @@ public class GameInterfaceController implements Initializable {
 
     @FXML
     private void repairPlane() {
+
         if (lstFleet.getSelectionModel().getSelectedItem() != null) {
             application.getPlayer().getAirplane(lstFleet.getSelectionModel().getSelectedIndex()).repair();
             updateFleetInterface();
+        }
+
+    }
+
+    private void updateFlyInterface() {
+
+        if (cbFleet.getSelectionModel().getSelectedItem() != null) {
+            lblPosition.setText("Standort: " + application.getPlayer().getAirplane(cbFleet.getSelectionModel().getSelectedIndex()).getPosition().getName());
+        } else {
+            lblPosition.setText("Standort: ");
+        }
+
+    }
+
+    @FXML
+    private void flyPlane() {
+
+        if (cbFleet.getSelectionModel().getSelectedItem() != null) {
+            application.getPlayer().getAirplane(cbFleet.getSelectionModel().getSelectedIndex()).fly((Airport) cbFlightTarget.getSelectionModel().getSelectedItem());
+            updateFlyInterface();
         }
 
     }

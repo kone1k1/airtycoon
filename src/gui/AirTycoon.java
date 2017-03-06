@@ -7,7 +7,7 @@ package gui;
 
 import main.Airplane;
 import main.Player;
-import functions.xml_reader;
+import functions.XmlReader;
 import java.io.InputStream;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -20,15 +20,16 @@ import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.layout.AnchorPane;
+import main.Airport;
 
 /**
  *
  * @author mastercs
  */
-public class Air_Tycoon extends Application {
+public class AirTycoon extends Application {
 
     private Stage stage;
-    private final xml_reader xml = new xml_reader();
+    private final XmlReader xml = new XmlReader();
     private Player player;
 
     public static void main(String[] args) {
@@ -42,11 +43,11 @@ public class Air_Tycoon extends Application {
     public void start(Stage primaryStage) throws Exception {
         try {
             stage = primaryStage;
-            stage.setTitle("AirTycoon 0.1");
+            stage.setTitle("Air Tycoon Alpha 0.2");
             gotoMainmenu();
             primaryStage.show();
         } catch (Exception ex) {
-            Logger.getLogger(Air_Tycoon.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AirTycoon.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -60,7 +61,7 @@ public class Air_Tycoon extends Application {
             }
             gameInterface.setApp(this);
         } catch (Exception ex) {
-            Logger.getLogger(Air_Tycoon.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AirTycoon.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -69,15 +70,15 @@ public class Air_Tycoon extends Application {
             MenueController mainMenu = (MenueController) replaceSceneContent("menue.fxml");
             mainMenu.setApp(this);
         } catch (Exception ex) {
-            Logger.getLogger(Air_Tycoon.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AirTycoon.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     private Initializable replaceSceneContent(String fxml) throws Exception {
         FXMLLoader loader = new FXMLLoader();
-        InputStream in = Air_Tycoon.class.getResourceAsStream(fxml);
+        InputStream in = AirTycoon.class.getResourceAsStream(fxml);
         loader.setBuilderFactory(new JavaFXBuilderFactory());
-        loader.setLocation(Air_Tycoon.class.getResource(fxml));
+        loader.setLocation(AirTycoon.class.getResource(fxml));
         AnchorPane page;
         try {
             page = (AnchorPane) loader.load(in);
@@ -109,6 +110,13 @@ public class Air_Tycoon extends Application {
         ObservableList<Airplane> airplanes;
         airplanes = FXCollections.observableArrayList(xml.getAirplanes());
         return airplanes;
+    }
+
+    public ObservableList loadXmlAirports() {
+
+        ObservableList<Airport> airports;
+        airports = FXCollections.observableArrayList(xml.getAirports());
+        return airports;
     }
 
     public void loadGame(Player pl) {

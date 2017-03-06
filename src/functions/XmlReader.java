@@ -26,13 +26,13 @@ import org.xml.sax.SAXException;
  *
  * @author mastercs
  */
-public class xml_reader {
+public class XmlReader {
 
     private List<Airport> airports;
     private List<Airplane> airplanes;
     private List<Player> players;
 
-    public xml_reader() {
+    public XmlReader() {
         loadAirports();
         loadAirplanes();
         loadPlayers();

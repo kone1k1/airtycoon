@@ -6,7 +6,7 @@
 package gui;
 
 import main.Player;
-import functions.xml_reader;
+import functions.XmlReader;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -22,8 +22,8 @@ import javafx.scene.control.TextField;
  */
 public class MenueController implements Initializable {
 
-    private Air_Tycoon application;
-    private final xml_reader xml = new xml_reader();
+    private AirTycoon application;
+    private final XmlReader xml = new XmlReader();
 
     @FXML
     TextField txtPlayername;
@@ -31,7 +31,7 @@ public class MenueController implements Initializable {
     @FXML
     ListView lstSaves;
 
-    public void setApp(Air_Tycoon application) {
+    public void setApp(AirTycoon application) {
         this.application = application;
         lstSaves.setItems(application.loadSavegames());
     }

@@ -33,6 +33,11 @@ public class Airport {
         this.costindex = costindex;
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
+
     public float getLat() {
         return lat;
     }

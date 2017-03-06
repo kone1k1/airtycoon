@@ -127,6 +127,10 @@ public class Airplane implements Cloneable {
         return fuel;
     }
 
+    public Airport getPosition() {
+        return position;
+    }
+
     public String getManufacturer() {
         return manufacturer;
     }
