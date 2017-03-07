@@ -5,6 +5,7 @@
  */
 package gui;
 
+import functions.Calculator;
 import main.Airplane;
 import java.net.URL;
 import java.text.NumberFormat;
@@ -79,12 +80,16 @@ public class GameInterfaceController implements Initializable {
     @FXML
     Label lblPosition;
 
+    @FXML
+    ProgressBar pbTicketCount;
+
     public void setApp(AirTycoon application) {
 
         this.application = application;
-        updateInterface();
-        cbFlightTarget.setItems(application.loadXmlAirports());
-        cbFlightTarget.getSelectionModel().select(0);
+        initialUpdate();
+        updateFlyInterface();
+        updateFleetInterface();
+        updatePlayerInterface();
     }
 
     @Override
@@ -94,30 +99,48 @@ public class GameInterfaceController implements Initializable {
         lstFleet.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
             updateFleetInterface();
         });
-
+        // ComboBox der Flotte der Spieler (Flugansicht)
         cbFleet.getSelectionModel().selectedItemProperty().addListener((observable) -> {
-            updateFlyInterface();
+            updatePosition();
+        });
+        sldTicketPrice.valueProperty().addListener((observable) -> {
+            updateTicketCount();
         });
 
     }
 
-    private void updateInterface() {
+    //Alles was nicht veränderbar ist und initial geladen werden soll
+    private void initialUpdate() {
 
+        /* Spieler Ansicht */
         lblPlayerName.setText(application.getPlayer().getName());
+        lstPlanes.setItems(application.loadXmlAirplanes());
+
+        /* Flug Anicht */
+        cbFleet.setItems(application.loadFleet());
+        if (cbFleet.getItems() != null) {
+            cbFleet.getSelectionModel().select(0);
+        }
+        cbFlightTarget.setItems(application.loadXmlAirports());
+        if (cbFlightTarget.getItems() != null) {
+            cbFlightTarget.getSelectionModel().select(0);
+        }
+
+    }
+
+    private void updatePlayerInterface() {
+
         lblPlayerBank.setText(NumberFormat.getInstance().format(application.getPlayer().getAccount().getMoney()) + " €");
         lblCredit.setText(NumberFormat.getInstance().format(application.getPlayer().getAccount().getCredit()) + " €");
         lstFleet.getItems().clear();
-        lstPlanes.getItems().clear();
         lstFleet.setItems(application.loadFleet());
-        lstPlanes.setItems(application.loadXmlAirplanes());
 
-        // Flugbereich
-        cbFleet.setItems(application.loadFleet());
     }
 
     private void updateFleetInterface() {
 
         if (lstFleet.getSelectionModel().getSelectedItem() != null) {
+
             lblPlaneManufactor.setText(application.getPlayer().getAirplane(lstFleet.getSelectionModel().getSelectedIndex()).getManufacturer());
             lblPlaneType.setText(application.getPlayer().getAirplane(lstFleet.getSelectionModel().getSelectedIndex()).getType());
             lblKmCount.setText(NumberFormat.getInstance().format(application.getPlayer().getAirplane(lstFleet.getSelectionModel().getSelectedIndex()).getFlightdistance()) + " km");
@@ -127,6 +150,7 @@ public class GameInterfaceController implements Initializable {
             pbRepearState.setProgress(application.getPlayer().getAirplane(lstFleet.getSelectionModel().getSelectedIndex()).getRepearstate() / 127F);
             pbFuel.setProgress(sldFuel.getValue() / sldFuel.getMax());
         } else {
+
             lblPlaneManufactor.setText("");
             lblPlaneType.setText("");
             lblKmCount.setText("");
@@ -137,12 +161,43 @@ public class GameInterfaceController implements Initializable {
         }
     }
 
+    private void updateFlyInterface() {
+
+        cbFleet.getItems().clear();
+        cbFleet.setItems(application.loadFleet());
+        if (cbFleet.getItems() != null) {
+            cbFleet.getSelectionModel().select(0);
+        }
+    }
+
+    private void updatePosition() {
+
+        if (cbFleet.getSelectionModel().getSelectedItem() != null) {
+
+            lblPosition.setText("Standort: " + application.getPlayer().getAirplane(cbFleet.getSelectionModel().getSelectedIndex()).getPosition().getName());
+        } else {
+
+            lblPosition.setText("Standort:");
+        }
+
+    }
+
+    private void updateTicketCount() {
+        if (!cbFlightTarget.getSelectionModel().getSelectedItem().equals(application.getPlayer().getAirplane(cbFleet.getSelectionModel().getSelectedIndex()).getPosition())) {
+            float buffer = (Calculator.passangerAmount((Airplane) cbFleet.getSelectionModel().getSelectedItem(), (Airport) cbFlightTarget.getSelectionModel().getSelectedItem(), (short) sldTicketPrice.getValue()));
+            pbTicketCount.setProgress(buffer / application.getPlayer().getAirplane(cbFleet.getSelectionModel().getSelectedIndex()).getMax_pax());
+        }
+
+    }
+
     @FXML
     private void buyPlane() {
 
         if (lstPlanes.getSelectionModel().getSelectedItem() != null) {
+
             application.getPlayer().buy_plane((Airplane) lstPlanes.getSelectionModel().getSelectedItem());
-            updateInterface();
+            updatePlayerInterface();
+            updateFlyInterface();
         }
     }
 
@@ -150,14 +205,17 @@ public class GameInterfaceController implements Initializable {
     private void getCredit() {
 
         application.getPlayer().getAccount().orderCredit((int) sldCredit.getValue());
-        updateInterface();
+        updatePlayerInterface();
     }
 
     @FXML
     private void sellPlane() {
+
         if (lstFleet.getSelectionModel().getSelectedItem() != null) {
+
             application.getPlayer().sell_plane((Airplane) lstFleet.getSelectionModel().getSelectedItem());
-            updateInterface();
+            updatePlayerInterface();
+            updateFlyInterface();
         }
     }
 
@@ -165,6 +223,7 @@ public class GameInterfaceController implements Initializable {
     private void refuelPlane() {
 
         if (lstFleet.getSelectionModel().getSelectedItem() != null) {
+
             application.getPlayer().getAirplane(lstFleet.getSelectionModel().getSelectedIndex()).setFuel((short) sldFuel.getValue());
             updateFleetInterface();
         }
@@ -174,18 +233,9 @@ public class GameInterfaceController implements Initializable {
     private void repairPlane() {
 
         if (lstFleet.getSelectionModel().getSelectedItem() != null) {
+
             application.getPlayer().getAirplane(lstFleet.getSelectionModel().getSelectedIndex()).repair();
             updateFleetInterface();
-        }
-
-    }
-
-    private void updateFlyInterface() {
-
-        if (cbFleet.getSelectionModel().getSelectedItem() != null) {
-            lblPosition.setText("Standort: " + application.getPlayer().getAirplane(cbFleet.getSelectionModel().getSelectedIndex()).getPosition().getName());
-        } else {
-            lblPosition.setText("Standort: ");
         }
 
     }
@@ -194,8 +244,9 @@ public class GameInterfaceController implements Initializable {
     private void flyPlane() {
 
         if (cbFleet.getSelectionModel().getSelectedItem() != null) {
+
             application.getPlayer().getAirplane(cbFleet.getSelectionModel().getSelectedIndex()).fly((Airport) cbFlightTarget.getSelectionModel().getSelectedItem());
-            updateFlyInterface();
+            updatePosition();
             updateFleetInterface();
         }
 

@@ -50,6 +50,10 @@ public class Airport {
         return name;
     }
 
+    public byte getCostindex() {
+        return costindex;
+    }
+
     public byte getId() {
         return id;
     }
