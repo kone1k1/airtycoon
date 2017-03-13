@@ -1,0 +1,1 @@
+Maven und MVVM Test
