@@ -141,7 +141,7 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="175.0" text="Flugzeug betanken" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                              <Button mnemonicParsing="false" onAction="#refuelPlaneButtonPressed" prefHeight="42.0" prefWidth="175.0" text="Flugzeug betanken" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                               <Label text="Betankung:" GridPane.rowIndex="6">
                                  <font>
                                     <Font size="18.0" />
@@ -183,7 +183,7 @@
                           </rowConstraints>
                            <children>
                               <ChoiceBox fx:id="cbFleet" prefHeight="25.0" prefWidth="224.0" />
-                              <Button mnemonicParsing="false" prefHeight="53.0" prefWidth="130.0" text="Fliegen" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                              <Button mnemonicParsing="false" onAction="#flyPlaneButtonPressed" prefHeight="53.0" prefWidth="130.0" text="Fliegen" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                  <font>
                                     <Font size="22.0" />
                                  </font>

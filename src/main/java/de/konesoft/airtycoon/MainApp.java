@@ -19,7 +19,7 @@ public class MainApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        stage.setTitle("Airmanager Tycoon 0.1");
+        stage.setTitle("Airmanager Tycoon 0.3");
         
         //Für testzwecke direkt Spieler laden
         final ViewTuple viewTuple = FluentViewLoader.fxmlView(GameInterfaceView.class).load();

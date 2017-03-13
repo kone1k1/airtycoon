@@ -5,6 +5,7 @@
  */
 package de.konesoft.airtycoon;
 
+import de.konesoft.airtycoon.GameInterfaceView;
 import de.saxsys.mvvmfx.FluentViewLoader;
 import de.saxsys.mvvmfx.FxmlView;
 import de.saxsys.mvvmfx.InjectViewModel;

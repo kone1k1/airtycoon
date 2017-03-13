@@ -5,6 +5,7 @@
  */
 package de.konesoft.airtycoon;
 
+import de.konesoft.airtycoon.GameLogic;
 import de.konesoft.airtycoon.model.Player;
 import de.saxsys.mvvmfx.ViewModel;
 import de.saxsys.mvvmfx.utils.commands.Action;
