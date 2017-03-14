@@ -131,6 +131,10 @@ public class Airplane implements Cloneable {
         return fuel;
     }
 
+    public short getPax() {
+        return pax;
+    }
+
     public short getMax_pax() {
         return max_pax;
     }

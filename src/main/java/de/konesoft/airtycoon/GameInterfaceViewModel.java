@@ -173,9 +173,13 @@ public class GameInterfaceViewModel implements ViewModel {
     public void flyPlane() {
 
         if (selectedFlyPlane.get() != null && selectedFlyPlane.get().getPosition() != selectedTarget.get()) {
+
+            selectedFlyPlane.get().setPax(Calculator.passangerAmount(selectedFlyPlane.get(), selectedTarget.get(), (short) ticketPrice.get()));
+            gameLogic.getPlayer().getAccount().deposit(selectedFlyPlane.get().getPax() * ticketPrice.get());
             selectedFlyPlane.get().fly(selectedTarget.get());
             reloadFlyManagementInterface();
             reloadFleetManagementInterface();
+            reloadPlayerInterface();
         }
 
     }
