@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.konesoft.airtycoon;
+package de.konesoft.airtycoon.gui;
 
+import de.konesoft.airtycoon.GameLogic;
 import de.konesoft.airtycoon.GameLogic;
 import de.konesoft.airtycoon.model.Player;
 import de.saxsys.mvvmfx.ViewModel;

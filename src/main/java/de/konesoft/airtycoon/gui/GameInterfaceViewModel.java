@@ -1,5 +1,6 @@
-package de.konesoft.airtycoon;
+package de.konesoft.airtycoon.gui;
 
+import de.konesoft.airtycoon.GameLogic;
 import de.konesoft.airtycoon.GameLogic;
 import de.konesoft.airtycoon.logic.functions.Calculator;
 import de.konesoft.airtycoon.model.Airplane;

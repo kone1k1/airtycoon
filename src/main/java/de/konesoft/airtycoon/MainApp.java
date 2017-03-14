@@ -1,5 +1,6 @@
 package de.konesoft.airtycoon;
 
+import de.konesoft.airtycoon.gui.GameInterfaceView;
 import de.saxsys.mvvmfx.FluentViewLoader;
 import javafx.application.Application;
 import javafx.scene.Parent;

@@ -1,4 +1,4 @@
-package de.konesoft.airtycoon;
+package de.konesoft.airtycoon.gui;
 
 import de.saxsys.mvvmfx.FxmlView;
 import de.saxsys.mvvmfx.InjectViewModel;
