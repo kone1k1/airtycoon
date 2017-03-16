@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TextArea;
 
 public class GameInterfaceView implements FxmlView<GameInterfaceViewModel>, Initializable {
 
@@ -55,6 +56,9 @@ public class GameInterfaceView implements FxmlView<GameInterfaceViewModel>, Init
     ProgressBar pbRepearState;
 
     @FXML
+    TextArea txtPlaneInfo;
+
+    @FXML
     Slider sldFuel;
 
     @FXML
@@ -89,6 +93,7 @@ public class GameInterfaceView implements FxmlView<GameInterfaceViewModel>, Init
         lblPlaneType.textProperty().bind(viewModel.PlaneTypeProperty());
         lblKmCount.textProperty().bind(viewModel.PlaneKmCountProperty());
         pbFuel.progressProperty().bind(viewModel.PlaneFuelProperty());
+        txtPlaneInfo.textProperty().bind(viewModel.PlaneDescriptionProperty());
         pbRepearState.progressProperty().bind(viewModel.PlaneStateProperty());
         sldFuel.maxProperty().bind(viewModel.PlaneMaxFuelProperty());
         sldFuel.valueProperty().bindBidirectional(viewModel.PlaneTankFuelProperty());
@@ -105,19 +110,21 @@ public class GameInterfaceView implements FxmlView<GameInterfaceViewModel>, Init
 
     @FXML
     private void getCreditButtonPressed() {
-
         viewModel.orderCredit();
     }
 
     @FXML
-    private void buyPlaneButtonPressed() {
+    private void payCreditButtonPressed() {
+        viewModel.payCredit();
+    }
 
+    @FXML
+    private void buyPlaneButtonPressed() {
         viewModel.buyPlane();
     }
 
     @FXML
     private void sellPlaneButtonPressed() {
-
         viewModel.sellPlane();
     }
 
@@ -137,7 +144,6 @@ public class GameInterfaceView implements FxmlView<GameInterfaceViewModel>, Init
 
     @FXML
     private void flyPlaneButtonPressed() {
-
         viewModel.flyPlane();
     }
 }

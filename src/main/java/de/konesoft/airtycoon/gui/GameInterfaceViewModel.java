@@ -1,7 +1,6 @@
 package de.konesoft.airtycoon.gui;
 
 import de.konesoft.airtycoon.GameLogic;
-import de.konesoft.airtycoon.GameLogic;
 import de.konesoft.airtycoon.logic.functions.Calculator;
 import de.konesoft.airtycoon.model.Airplane;
 import de.konesoft.airtycoon.model.Airport;
@@ -36,6 +35,7 @@ public class GameInterfaceViewModel implements ViewModel {
     private final StringProperty planeManufactor = new SimpleStringProperty();
     private final StringProperty planeType = new SimpleStringProperty();
     private final StringProperty planeKmCount = new SimpleStringProperty();
+    private final StringProperty planeDescription = new SimpleStringProperty();
     private final DoubleProperty planeFuel = new SimpleDoubleProperty();
     private final DoubleProperty planeState = new SimpleDoubleProperty();
     private final IntegerProperty planeMaxFuel = new SimpleIntegerProperty();
@@ -102,6 +102,7 @@ public class GameInterfaceViewModel implements ViewModel {
             planeType.set(selectedFleetPlane.get().getType());
             planeFuel.set((double) selectedFleetPlane.get().getFuel() / selectedFleetPlane.get().getMaxFuel());
             planeState.set(selectedFleetPlane.get().getRepearstate() / 127F);
+            planeDescription.set(selectedFleetPlane.get().getTextinfo());
             planeMaxFuel.set(selectedFleetPlane.get().getMaxFuel());
             planeTankFuel.set(selectedFleetPlane.get().getFuel());
 
@@ -111,6 +112,7 @@ public class GameInterfaceViewModel implements ViewModel {
             planeManufactor.set("");
             planeType.set("");
             planeFuel.set(0);
+            planeDescription.set("");
             planeState.set(0);
             planeMaxFuel.set(40000);
             planeTankFuel.set(0);
@@ -130,6 +132,12 @@ public class GameInterfaceViewModel implements ViewModel {
     public void orderCredit() {
 
         gameLogic.getPlayer().getAccount().orderCredit(playerOrderCredit.getValue());
+        reloadPlayerInterface();
+    }
+
+    public void payCredit() {
+
+        gameLogic.getPlayer().getAccount().returnCredit(playerOrderCredit.getValue());
         reloadPlayerInterface();
     }
 
@@ -223,6 +231,10 @@ public class GameInterfaceViewModel implements ViewModel {
 
     public StringProperty PlaneTypeProperty() {
         return planeType;
+    }
+
+    public StringProperty PlaneDescriptionProperty() {
+        return planeDescription;
     }
 
     public ObjectProperty<Airplane> SelectedFleetPlaneProperty() {
