@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.konesoft.airtycoon.logic.functions;
+package de.konesoft.airtycoon.functions;
 
 import de.konesoft.airtycoon.model.Airplane;
 import de.konesoft.airtycoon.model.Airport;

@@ -8,7 +8,7 @@ package de.konesoft.airtycoon;
 import de.konesoft.airtycoon.model.Airplane;
 import de.konesoft.airtycoon.model.Airport;
 import de.konesoft.airtycoon.model.Player;
-import de.konesoft.airtycoon.logic.functions.XmlReader;
+import de.konesoft.airtycoon.functions.XmlReader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

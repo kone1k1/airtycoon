@@ -5,7 +5,7 @@
  */
 package de.konesoft.airtycoon.model;
 
-import de.konesoft.airtycoon.logic.functions.Calculator;
+import de.konesoft.airtycoon.functions.Calculator;
 import java.text.NumberFormat;
 
 /**
