@@ -20,61 +20,61 @@ public class GameInterfaceView implements FxmlView<GameInterfaceViewModel>, Init
     private GameInterfaceViewModel viewModel;
 
     @FXML
-    Label lblPlayerName;
+    private Label lblPlayerName;
 
     @FXML
-    Label lblPlayerMoney;
+    private Label lblPlayerMoney;
 
     @FXML
-    Label lblPlayerCredit;
+    private Label lblPlayerCredit;
 
     @FXML
-    Slider sldPlayerOrderCredit;
+    private Slider sldPlayerOrderCredit;
 
     @FXML
-    ListView lstBuyablePlanes;
+    private ListView lstBuyablePlanes;
 
     @FXML
-    Button btnGetCredit;
+    private Button btnGetCredit;
 
     @FXML
-    ListView lstPlayerFleet;
+    private ListView lstPlayerFleet;
 
     @FXML
-    Label lblPlaneManufactor;
+    private Label lblPlaneManufactor;
 
     @FXML
-    Label lblPlaneType;
+    private Label lblPlaneType;
 
     @FXML
-    Label lblKmCount;
+    private Label lblKmCount;
 
     @FXML
-    ProgressBar pbFuel;
+    private ProgressBar pbFuel;
 
     @FXML
-    ProgressBar pbRepearState;
+    private ProgressBar pbRepearState;
 
     @FXML
-    TextArea txtPlaneInfo;
+    private TextArea txtPlaneInfo;
 
     @FXML
-    Slider sldFuel;
+    private Slider sldFuel;
 
     @FXML
-    ChoiceBox cbFleet;
+    private ChoiceBox cbFleet;
 
     @FXML
-    Label lblPosition;
+    private Label lblPosition;
 
     @FXML
-    Slider sldTicketPrice;
+    private Slider sldTicketPrice;
 
     @FXML
-    ProgressBar pbTicketCount;
+    private ProgressBar pbTicketCount;
 
     @FXML
-    ChoiceBox cbFlightTarget;
+    private ChoiceBox cbFlightTarget;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -105,7 +105,7 @@ public class GameInterfaceView implements FxmlView<GameInterfaceViewModel>, Init
         pbTicketCount.progressProperty().bind(viewModel.TicketSoldProperty());
         cbFlightTarget.setItems(viewModel.AirportsProperty());
         viewModel.SelectedTargetProperty().bind(cbFlightTarget.getSelectionModel().selectedItemProperty());
-        cbFlightTarget.getSelectionModel().selectFirst();
+        cbFlightTarget.getSelectionModel().selectLast();
     }
 
     @FXML
@@ -130,14 +130,12 @@ public class GameInterfaceView implements FxmlView<GameInterfaceViewModel>, Init
 
     @FXML
     private void repairPlaneButtonPressed() {
-
         viewModel.repairPlane();
         lstPlayerFleet.getSelectionModel().selectPrevious();
     }
 
     @FXML
     private void refuelPlaneButtonPressed() {
-
         viewModel.refuelPlane();
         lstPlayerFleet.getSelectionModel().selectPrevious();
     }
