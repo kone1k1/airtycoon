@@ -9,12 +9,15 @@ and open the template in the editor.
         <id>0</id>
         <name>mastercs</name>
         <money>1500000</money>
+        <credit>0</credit>       
         <fleet>0</fleet>
+        
     </player>
     <player>
         <id>1</id>
         <name>jg</name>
         <money>2000000</money>
+        <credit>0</credit>  
          <fleet>2</fleet>
     </player>       
 </players>

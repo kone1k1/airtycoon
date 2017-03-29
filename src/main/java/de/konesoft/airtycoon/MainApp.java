@@ -11,8 +11,6 @@ import de.saxsys.mvvmfx.ViewTuple;
 
 public class MainApp extends Application {
 
-    public String test = "test";
-
     public static void main(String... args) {
         Application.launch(args);
     }
@@ -21,7 +19,7 @@ public class MainApp extends Application {
     public void start(Stage stage) throws Exception {
 
         stage.setTitle("Airmanager Tycoon 0.3");
-        
+
         //Für testzwecke direkt Spieler laden
         final ViewTuple viewTuple = FluentViewLoader.fxmlView(GameInterfaceView.class).load();
 

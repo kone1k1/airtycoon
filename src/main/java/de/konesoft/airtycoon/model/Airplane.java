@@ -1,77 +1,81 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.konesoft.airtycoon.model;
 
 import de.konesoft.airtycoon.functions.Calculator;
 import java.text.NumberFormat;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
+ * Modellierungsklasse für ein Flugzeug
  *
  * @author mastercs
  */
+@XmlRootElement
 public class Airplane implements Cloneable {
+
+    private static final int MIN_PAX = 4;
 
     private final byte id;
     private final String manufacturer;
     private final String type;
-    private final String textinfo;
+    private final String description;
     private final short speed;
     private final int price;
 
-    private short max_range;
-    private short pax = 4;
-    private short max_pax;
-    private short fuel = 1000;
-    private short max_fuel;
-    private byte repearstate = 127;
-    private int flightdistance = 0;
+    private short maxRange;
+    private short pax;
+    private short maxPax;
+    private short fuel;
+    private short maxFuel;
+    private byte repearState;
+    private int flightDistance;
 
     private Airport position;
 
-    public Airplane(byte id, String manufacturer, String type, String textinfo, short speed, short max_range, short max_pax, short max_fuel, int price, Airport position) {
+    public Airplane(byte id, String manufacturer, String type, String textinfo, short speed, short maxRange, short maxPax, short maxFuel, int price, Airport position) {
+
         this.id = id;
         this.manufacturer = manufacturer;
         this.type = type;
-        this.textinfo = textinfo;
+        this.description = textinfo;
         this.speed = speed;
-        this.max_range = max_range;
-        this.max_pax = max_pax;
-        this.max_fuel = max_fuel;
+        this.maxRange = maxRange;
+        this.maxPax = maxPax;
+        this.maxFuel = maxFuel;
         this.position = position;
         this.price = price;
+        this.pax = MIN_PAX;
+        this.fuel = 1000;
+        this.repearState = 127;
+        this.flightDistance = 0;
     }
 
     public boolean fly(Airport target) {
+
         if (target != null) {
             int dist = Calculator.calcDistance(position, target);
             int efuel = calcFuelConsumption(dist);
             if ((target.getId() == position.getId())) {
                 System.out.println("Startflughafen = Zielflughafen");
                 return false;
-            } else if ((target.getId() != position.getId()) && (dist < max_range) && (fuel > efuel) && !(crash_test())) {
+            } else if ((target.getId() != position.getId()) && (dist < maxRange) && (fuel > efuel) && !(crash_test())) {
                 position = target;
-                flightdistance += dist;
-                pax = 4;
-                repearstate--;
+                flightDistance += dist;
+                pax = MIN_PAX;
+                repearState--;
                 System.out.println("Das Flugzeug des Typs " + manufacturer + " " + type + " flog " + dist + " km!" + System.lineSeparator() + "Dabei verbrauchte es " + efuel + " KG Kerosin." + System.lineSeparator() + "Der Restbestand im Tank ist " + fuel + " KG Kerosin.");
                 return true;
             } else {
                 System.out.println("Flugdistanz zu groß oder nicht genug Kerosin!");
                 return false;
-
             }
         } else {
             return false;
         }
-
     }
 
     private int calcFuelConsumption(double distance_nm) {
-        int efuel;
 
+        int efuel;
         efuel = (int) (pax * 0.9 * (distance_nm * 0.539957) * 0.05926);
         if (efuel < fuel) {
             fuel -= efuel;
@@ -80,39 +84,40 @@ public class Airplane implements Cloneable {
     }
 
     private boolean crash_test() {
-        byte result = (byte) (Math.random() * repearstate);
+
+        byte result = (byte) (Math.random() * repearState);
         return result == 0;
     }
 
     public void repair() {
-        repearstate = 127;
+        repearState = 127;
     }
 
     @Override
     public String toString() {
-        String result = "Flugzeugtyp: " + manufacturer + " " + type + System.lineSeparator() + "Anzahl Sitze: " + max_pax + System.lineSeparator() + "Preis: " + NumberFormat.getInstance().format(price) + " €";
+        String result = "Flugzeugtyp: " + manufacturer + " " + type + System.lineSeparator() + "Anzahl Sitze: " + maxPax + System.lineSeparator() + "Preis: " + NumberFormat.getInstance().format(price) + " €";
         return result;
     }
 
     @Override
     public Object clone() throws CloneNotSupportedException {
-        return super.clone(); //To change body of generated methods, choose Tools | Templates.
+        return super.clone();
     }
 
     public short getMaxFuel() {
-        return max_fuel;
+        return maxFuel;
     }
 
     public short getId() {
         return id;
     }
 
-    public int getFlightdistance() {
-        return flightdistance;
+    public int getFlightDistance() {
+        return flightDistance;
     }
 
-    public String getTextinfo() {
-        return textinfo;
+    public String getDescription() {
+        return description;
     }
 
     public short getSpeed() {
@@ -135,8 +140,8 @@ public class Airplane implements Cloneable {
         return pax;
     }
 
-    public short getMax_pax() {
-        return max_pax;
+    public short getMaxPax() {
+        return maxPax;
     }
 
     public Airport getPosition() {
@@ -147,8 +152,8 @@ public class Airplane implements Cloneable {
         return manufacturer;
     }
 
-    public byte getRepearstate() {
-        return repearstate;
+    public byte getRepearState() {
+        return repearState;
     }
 
     public void setPax(short pax) {
@@ -161,15 +166,15 @@ public class Airplane implements Cloneable {
 
     //bereich für upgrades
     public void setMaxFuel(short maxfuel) {
-        this.max_fuel = maxfuel;
+        this.maxFuel = maxfuel;
     }
 
-    public void setMax_pax(short max_pax) {
-        this.max_pax = max_pax;
+    public void setMaxPax(short maxPax) {
+        this.maxPax = maxPax;
     }
 
-    public void setMax_range(short max_range) {
-        this.max_range = max_range;
+    public void setMaxRange(short maxRange) {
+        this.maxRange = maxRange;
     }
 
 }

@@ -1,10 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.konesoft.airtycoon.model;
 
+/**
+ * Modellierungsklasse für eine Spielerbank
+ *
+ * @author mastercs
+ */
 public class Bank {
 
     private final byte id;
@@ -12,19 +12,26 @@ public class Bank {
     private int credit;
     private static final int MAX_CREDIT_VALUE = 50000000;
 
-    //Spiel Laden
-    public Bank(byte id, int money) {
-
-        this.id = id;
-        this.money = money;
-    }
-
     //Neues Spiel
     public Bank() {
 
         this.id = 0;
         this.money = 2500000;
         this.credit = 0;
+    }
+
+    /**
+     * Die Bank eines geladenen Spielers erstellen
+     *
+     * @param id
+     * @param money
+     * @param credit
+     */
+    public Bank(byte id, int money, int credit) {
+
+        this.id = id;
+        this.money = money;
+        this.credit = credit;
     }
 
     public boolean transaction(int amount) {

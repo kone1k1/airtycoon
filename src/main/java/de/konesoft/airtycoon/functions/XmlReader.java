@@ -5,7 +5,6 @@
  */
 package de.konesoft.airtycoon.functions;
 
-
 import de.konesoft.airtycoon.model.Airplane;
 import de.konesoft.airtycoon.model.Airport;
 import de.konesoft.airtycoon.model.Bank;
@@ -34,6 +33,7 @@ public class XmlReader {
     private List<Player> players;
 
     public XmlReader() {
+
         loadAirports();
         loadAirplanes();
         loadPlayers();
@@ -42,7 +42,6 @@ public class XmlReader {
     private void loadAirports() {
 
         airports = new ArrayList<>();
-
         try {
             File stocks = new File("src/main/resources/xml/airports.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -52,9 +51,7 @@ public class XmlReader {
             NodeList nodes = doc.getElementsByTagName("airport");
 
             for (int i = 0; i < nodes.getLength(); i++) {
-
                 Node node = nodes.item(i);
-
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
 
                     Element element = (Element) node;
@@ -74,7 +71,6 @@ public class XmlReader {
     private void loadAirplanes() {
 
         airplanes = new ArrayList<>();
-
         try {
             File stocks = new File("src/main/resources/xml/aircrafts.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -84,9 +80,7 @@ public class XmlReader {
             NodeList nodes = doc.getElementsByTagName("aircraft");
 
             for (int i = 0; i < nodes.getLength(); i++) {
-
                 Node node = nodes.item(i);
-
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
 
                     Element element = (Element) node;
@@ -109,7 +103,6 @@ public class XmlReader {
     private void loadPlayers() {
 
         players = new ArrayList<>();
-
         try {
             File stocks = new File("src/main/resources/xml/players.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -126,18 +119,21 @@ public class XmlReader {
                     Element element = (Element) node;
                     String name = getValue("name", element);
                     int money = Integer.parseInt(getValue("money", element));
+                    int credit = Integer.parseInt(getValue("credit", element));
                     int fleetIndex = Integer.parseInt(getValue("fleet", element));
                     playerAirplanes.add(airplanes.get(fleetIndex));
-                    players.add(new Player((byte) i, name, new Bank((byte) i, money), playerAirplanes));
-
+                    players.add(new Player((byte) i, name, new Bank((byte) i, money, credit), playerAirplanes));
                 }
             }
         } catch (IOException | NumberFormatException | ParserConfigurationException | SAXException ex) {
+        } catch (NullPointerException e){
+            System.out.println(e.getMessage());
         }
 
     }
 
     private static String getValue(String tag, Element element) {
+
         NodeList nodes = element.getElementsByTagName(tag).item(0).getChildNodes();
         Node node = (Node) nodes.item(0);
         return node.getNodeValue();

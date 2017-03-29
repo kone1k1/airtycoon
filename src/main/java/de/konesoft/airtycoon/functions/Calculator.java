@@ -1,14 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.konesoft.airtycoon.functions;
 
 import de.konesoft.airtycoon.model.Airplane;
 import de.konesoft.airtycoon.model.Airport;
-
-
 
 /**
  *
@@ -29,21 +22,22 @@ public class Calculator {
         int dist = (int) (EARTHRADIUS * c);
 
         return dist / 1000;
-
     }
 
     public static short TravelTime(short distance, Airplane plane) {
+        
         short time = (short) (distance / plane.getSpeed());
         time *= 1.03;
         return time;
     }
 
     public static short passangerAmount(Airplane airplane, Airport target, short price) {
-        short calcPassanger = (short) (calcDistance(airplane.getPosition(), target) + airplane.getMax_pax() - (target.getCostindex() / 10) * price);
+        
+        short calcPassanger = (short) (calcDistance(airplane.getPosition(), target) + airplane.getMaxPax() - (target.getCostIndex() / 10) * price);
         if (calcPassanger < 0) {
             calcPassanger = 0;
-        } else if (calcPassanger > airplane.getMax_pax()) {
-            calcPassanger = airplane.getMax_pax();
+        } else if (calcPassanger > airplane.getMaxPax()) {
+            calcPassanger = airplane.getMaxPax();
         }
         return calcPassanger;
     }

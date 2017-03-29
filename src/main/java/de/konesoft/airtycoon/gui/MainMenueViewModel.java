@@ -6,7 +6,6 @@
 package de.konesoft.airtycoon.gui;
 
 import de.konesoft.airtycoon.GameLogic;
-import de.konesoft.airtycoon.GameLogic;
 import de.konesoft.airtycoon.model.Player;
 import de.saxsys.mvvmfx.ViewModel;
 import de.saxsys.mvvmfx.utils.commands.Action;
@@ -21,7 +20,7 @@ import javafx.beans.property.StringProperty;
 
 public class MainMenueViewModel implements ViewModel {
 
-    private final GameLogic gameLogic = new GameLogic();
+    private final GameLogic gameLogic = GameLogic.getSingletonGameLogic();
     private final StringProperty playerName = new SimpleStringProperty("");
     private final ObjectProperty selectetPlayer = new SimpleObjectProperty();
     private final ListProperty saveList;

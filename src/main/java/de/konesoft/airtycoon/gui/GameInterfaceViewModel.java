@@ -19,13 +19,13 @@ import javafx.beans.property.StringProperty;
 
 public class GameInterfaceViewModel implements ViewModel {
 
-    private final GameLogic gameLogic = new GameLogic();
+    private final GameLogic gameLogic = GameLogic.getSingletonGameLogic();
 
     //Spieleramanagement
     private final StringProperty playerName = new SimpleStringProperty();
     private final StringProperty playerMoney = new SimpleStringProperty();
     private final StringProperty playerCredit = new SimpleStringProperty();
-    private ListProperty<Airplane> buyablePlanes;
+    private ListProperty buyablePlanes;
     private final IntegerProperty playerOrderCredit = new SimpleIntegerProperty();
     private final ObjectProperty selectedBuyPlane = new SimpleObjectProperty();
 
@@ -52,35 +52,29 @@ public class GameInterfaceViewModel implements ViewModel {
 
     public GameInterfaceViewModel() {
 
-        gameLogic.newPlayer("mastercs");
         initLoad();
         reloadPlayerInterface();
-
         ticketPrice.addListener((observable, oldValue, newValue) -> {
 
             if (selectedFlyPlane.get() != null && selectedTarget.get() != selectedFlyPlane.get().getPosition()) {
                 short buffer = Calculator.passangerAmount(selectedFlyPlane.get(), selectedTarget.get(), (short) ticketPrice.get());
-
-                ticketSold.set(buffer / (double) selectedFlyPlane.get().getMax_pax());
+                ticketSold.set(buffer / (double) selectedFlyPlane.get().getMaxPax());
             }
-
         });
-
         selectedFleetPlane.addListener((observable, oldValue, newValue) -> {
             reloadFleetManagementInterface();
         });
         selectedFlyPlane.addListener((observable, oldValue, newValue) -> {
             reloadFlyManagementInterface();
         });
-
     }
 
     // Alles was unveränderbar ist und initial geladen werden kann
     private void initLoad() {
-
+        gameLogic.newPlayer("mastercs");
         playerName.setValue(gameLogic.getPlayer().getName());
         airports.set(gameLogic.xmlAirports());
-        buyablePlanes = new SimpleListProperty<>(gameLogic.xmlAirplanes());
+        buyablePlanes = new SimpleListProperty(gameLogic.xmlAirplanes());
     }
 
     private void reloadPlayerInterface() {
@@ -96,18 +90,15 @@ public class GameInterfaceViewModel implements ViewModel {
     private void reloadFleetManagementInterface() {
 
         if (selectedFleetPlane.get() != null) {
-
-            planeKmCount.set(selectedFleetPlane.get().getFlightdistance() + " KM");
+            planeKmCount.set(selectedFleetPlane.get().getFlightDistance() + " km");
             planeManufactor.set(selectedFleetPlane.get().getManufacturer());
             planeType.set(selectedFleetPlane.get().getType());
             planeFuel.set((double) selectedFleetPlane.get().getFuel() / selectedFleetPlane.get().getMaxFuel());
-            planeState.set(selectedFleetPlane.get().getRepearstate() / 127F);
-            planeDescription.set(selectedFleetPlane.get().getTextinfo());
+            planeState.set(selectedFleetPlane.get().getRepearState() / 127F);
+            planeDescription.set(selectedFleetPlane.get().getDescription());
             planeMaxFuel.set(selectedFleetPlane.get().getMaxFuel());
             planeTankFuel.set(selectedFleetPlane.get().getFuel());
-
         } else {
-
             planeKmCount.set("");
             planeManufactor.set("");
             planeType.set("");
@@ -125,7 +116,6 @@ public class GameInterfaceViewModel implements ViewModel {
             planePosition.set("Position: " + selectedFlyPlane.get().getPosition().getName());
         } else {
             planePosition.set("Position:");
-
         }
     }
 
@@ -147,7 +137,6 @@ public class GameInterfaceViewModel implements ViewModel {
             gameLogic.getPlayer().buy_plane((Airplane) selectedBuyPlane.get());
             reloadPlayerInterface();
         }
-
     }
 
     public void sellPlane() {
@@ -157,7 +146,6 @@ public class GameInterfaceViewModel implements ViewModel {
             reloadPlayerInterface();
             reloadFleetManagementInterface();
         }
-
     }
 
     public void refuelPlane() {
@@ -182,7 +170,6 @@ public class GameInterfaceViewModel implements ViewModel {
     public void flyPlane() {
 
         if (selectedFlyPlane.get() != null && selectedFlyPlane.get().getPosition() != selectedTarget.get()) {
-
             selectedFlyPlane.get().setPax(Calculator.passangerAmount(selectedFlyPlane.get(), selectedTarget.get(), (short) ticketPrice.get()));
             gameLogic.getPlayer().getAccount().deposit(selectedFlyPlane.get().getPax() * ticketPrice.get());
             selectedFlyPlane.get().fly(selectedTarget.get());
@@ -193,7 +180,7 @@ public class GameInterfaceViewModel implements ViewModel {
 
     }
 
-    public ListProperty<Airplane> getBuyablePlanes() {
+    public ListProperty getBuyablePlanes() {
         return buyablePlanes;
     }
 
