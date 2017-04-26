@@ -16,6 +16,7 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.image.Image;
 
 public class GameInterfaceViewModel implements ViewModel {
 
@@ -36,6 +37,7 @@ public class GameInterfaceViewModel implements ViewModel {
     private final StringProperty planeType = new SimpleStringProperty();
     private final StringProperty planeKmCount = new SimpleStringProperty();
     private final StringProperty planeDescription = new SimpleStringProperty();
+    private final ObjectProperty<Image> planeImg = new SimpleObjectProperty<>();
     private final DoubleProperty planeFuel = new SimpleDoubleProperty();
     private final DoubleProperty planeState = new SimpleDoubleProperty();
     private final IntegerProperty planeMaxFuel = new SimpleIntegerProperty();
@@ -98,6 +100,7 @@ public class GameInterfaceViewModel implements ViewModel {
             planeDescription.set(selectedFleetPlane.get().getDescription());
             planeMaxFuel.set(selectedFleetPlane.get().getMaxFuel());
             planeTankFuel.set(selectedFleetPlane.get().getFuel());
+            planeImg.set(new Image("/img/" + selectedFleetPlane.get().getType() + ".jpg"));
         } else {
             planeKmCount.set("");
             planeManufactor.set("");
@@ -107,6 +110,7 @@ public class GameInterfaceViewModel implements ViewModel {
             planeState.set(0);
             planeMaxFuel.set(40000);
             planeTankFuel.set(0);
+            planeImg.set(new Image("/img/boing737.jpg")); // Default IMGAE MISSION FOR NOW, SHOULD BE REPLACED
         }
     }
 
@@ -210,6 +214,10 @@ public class GameInterfaceViewModel implements ViewModel {
 
     public StringProperty PlaneManufactorProperty() {
         return planeManufactor;
+    }
+
+    public ObjectProperty<Image> PlaneImgProperty() {
+        return planeImg;
     }
 
     public StringProperty PlaneKmCountProperty() {

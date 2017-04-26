@@ -13,7 +13,7 @@ and open the template in the editor.
         <max_pax>188</max_pax>
         <textinfo>Die Boeing 737 des US-amerikanischen Flugzeugherstellers Boeing ist die weltweit meistgebaute Familie strahlgetriebener Verkehrsflugzeuge. Der als Schmalrumpfflugzeug ausgelegte Typ wird mittlerweile in der dritten Generation gefertigt und hat über die Zeit seine äußere Erscheinung kaum geändert. </textinfo>
         <max_range>5000</max_range>
-        <price>15000000</price>
+        <price>1500000</price>
         <speed>907</speed>
         <max_fuel>16084</max_fuel> 
     </aircraft>

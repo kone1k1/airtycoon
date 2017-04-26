@@ -5,7 +5,7 @@ package de.konesoft.airtycoon.model;
  *
  * @author mastercs
  */
-public class Airport {
+public class Airport implements Positionable {
 
     private final byte id;
     private final String name;
@@ -35,14 +35,6 @@ public class Airport {
         return name;
     }
 
-    public float getLat() {
-        return lat;
-    }
-
-    public float getLng() {
-        return lng;
-    }
-
     public String getName() {
         return name;
     }
@@ -53,5 +45,25 @@ public class Airport {
 
     public byte getId() {
         return id;
+    }
+
+    @Override
+    public void setLng(float lng) {
+        //
+    }
+
+    @Override
+    public void setLat(float lat) {
+        //
+    }
+
+    @Override
+    public float getLng() {
+        return lng;
+    }
+
+    @Override
+    public float getLat() {
+        return lat;
     }
 }

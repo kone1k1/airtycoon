@@ -13,6 +13,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class GameInterfaceView implements FxmlView<GameInterfaceViewModel>, Initializable {
 
@@ -59,6 +61,9 @@ public class GameInterfaceView implements FxmlView<GameInterfaceViewModel>, Init
     private TextArea txtPlaneInfo;
 
     @FXML
+    private ImageView imgPlane;
+
+    @FXML
     private Slider sldFuel;
 
     @FXML
@@ -91,6 +96,7 @@ public class GameInterfaceView implements FxmlView<GameInterfaceViewModel>, Init
         viewModel.SelectedFleetPlaneProperty().bind(lstPlayerFleet.getSelectionModel().selectedItemProperty());
         lblPlaneManufactor.textProperty().bind(viewModel.PlaneManufactorProperty());
         lblPlaneType.textProperty().bind(viewModel.PlaneTypeProperty());
+        imgPlane.imageProperty().bindBidirectional(viewModel.PlaneImgProperty());
         lblKmCount.textProperty().bind(viewModel.PlaneKmCountProperty());
         pbFuel.progressProperty().bind(viewModel.PlaneFuelProperty());
         txtPlaneInfo.textProperty().bind(viewModel.PlaneDescriptionProperty());
