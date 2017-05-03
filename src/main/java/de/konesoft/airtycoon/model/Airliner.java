@@ -34,14 +34,15 @@ public class Airliner extends Airplane implements Cloneable {
     @Override
     public void fly(Airport target) {
 
-        if (target != null) {
-            int dist = Calculator.calcDistance(position, target);
-            int estimatedFuel = calcFuelConsumption(dist);
-            if ((target.getId() == position.getId())) {
-                System.out.println("Startflughafen = Zielflughafen");
-            } else if ((target.getId() != position.getId()) && (dist < super.getMaxRange()) && (fuel > estimatedFuel) && !(crashTest())) {
+        int dist = Calculator.calcDistance(position, target);
+        int estimatedFuel = calcFuelConsumption(dist);
+
+        if (target != null && position != target) {
+
+            if ((dist < super.getMaxRange()) && (fuel > estimatedFuel) && !(crashTest())) {
                 position = target;
                 flightDistance += dist;
+                fuel -= estimatedFuel;
                 pax = MIN_PAX;
                 repearState--;
                 System.out.println("Das Flugzeug des Typs " + super.getManufacturer() + " " + super.getType() + " flog " + dist + " km!" + System.lineSeparator() + "Dabei verbrauchte es " + estimatedFuel + " KG Kerosin." + System.lineSeparator() + "Der Restbestand im Tank ist " + fuel + " KG Kerosin.");
@@ -53,11 +54,7 @@ public class Airliner extends Airplane implements Cloneable {
 
     private int calcFuelConsumption(double distanceNm) {
 
-        int estimatedFuel;
-        estimatedFuel = (int) (pax * 0.9 * (distanceNm * 0.539957) * 0.05926);
-        if (estimatedFuel < fuel) {
-            fuel -= estimatedFuel;
-        }
+        int estimatedFuel = (int) (pax * 0.9 * (distanceNm * 0.539957) * 0.05926);
         return estimatedFuel;
     }
 
