@@ -24,7 +24,7 @@ public abstract class Airplane {
         this.maxPax = maxPax;
     }
 
-    public abstract boolean fly(Airport target);
+    public abstract void fly(Airport target);
 
     public short getMaxFuel() {
         return maxFuel;

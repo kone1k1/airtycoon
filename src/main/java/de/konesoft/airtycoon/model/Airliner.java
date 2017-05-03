@@ -2,14 +2,12 @@ package de.konesoft.airtycoon.model;
 
 import de.konesoft.airtycoon.functions.Calculator;
 import java.text.NumberFormat;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * Modellierungsklasse für ein Flugzeug
+ * Heavy Metal Airliner Class
  *
  * @author mastercs
  */
-@XmlRootElement
 public class Airliner extends Airplane implements Cloneable {
 
     private static final int MIN_PAX = 4;
@@ -34,41 +32,36 @@ public class Airliner extends Airplane implements Cloneable {
     }
 
     @Override
-    public boolean fly(Airport target) {
+    public void fly(Airport target) {
 
         if (target != null) {
             int dist = Calculator.calcDistance(position, target);
-            int efuel = calcFuelConsumption(dist);
+            int estimatedFuel = calcFuelConsumption(dist);
             if ((target.getId() == position.getId())) {
                 System.out.println("Startflughafen = Zielflughafen");
-                return false;
-            } else if ((target.getId() != position.getId()) && (dist < super.getMaxRange()) && (fuel > efuel) && !(crash_test())) {
+            } else if ((target.getId() != position.getId()) && (dist < super.getMaxRange()) && (fuel > estimatedFuel) && !(crashTest())) {
                 position = target;
                 flightDistance += dist;
                 pax = MIN_PAX;
                 repearState--;
-                System.out.println("Das Flugzeug des Typs " + super.getManufacturer() + " " + super.getType() + " flog " + dist + " km!" + System.lineSeparator() + "Dabei verbrauchte es " + efuel + " KG Kerosin." + System.lineSeparator() + "Der Restbestand im Tank ist " + fuel + " KG Kerosin.");
-                return true;
+                System.out.println("Das Flugzeug des Typs " + super.getManufacturer() + " " + super.getType() + " flog " + dist + " km!" + System.lineSeparator() + "Dabei verbrauchte es " + estimatedFuel + " KG Kerosin." + System.lineSeparator() + "Der Restbestand im Tank ist " + fuel + " KG Kerosin.");
             } else {
                 System.out.println("Flugdistanz zu groß oder nicht genug Kerosin!");
-                return false;
             }
-        } else {
-            return false;
         }
     }
 
-    private int calcFuelConsumption(double distance_nm) {
+    private int calcFuelConsumption(double distanceNm) {
 
-        int efuel;
-        efuel = (int) (pax * 0.9 * (distance_nm * 0.539957) * 0.05926);
-        if (efuel < fuel) {
-            fuel -= efuel;
+        int estimatedFuel;
+        estimatedFuel = (int) (pax * 0.9 * (distanceNm * 0.539957) * 0.05926);
+        if (estimatedFuel < fuel) {
+            fuel -= estimatedFuel;
         }
-        return efuel;
+        return estimatedFuel;
     }
 
-    private boolean crash_test() {
+    private boolean crashTest() {
         return (byte) (Math.random() * repearState) == 0;
     }
 
