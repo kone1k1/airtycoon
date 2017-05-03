@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.konesoft.airtycoon.functions;
 
 import de.konesoft.airtycoon.model.Airliner;
@@ -126,7 +121,7 @@ public class XmlReader {
                 }
             }
         } catch (IOException | NumberFormatException | ParserConfigurationException | SAXException ex) {
-        } catch (NullPointerException e){
+        } catch (NullPointerException e) {
             System.out.println(e.getMessage());
         }
 

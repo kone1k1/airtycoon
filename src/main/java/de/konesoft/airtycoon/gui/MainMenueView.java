@@ -1,11 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.konesoft.airtycoon.gui;
 
-import de.konesoft.airtycoon.gui.GameInterfaceView;
 import de.saxsys.mvvmfx.FluentViewLoader;
 import de.saxsys.mvvmfx.FxmlView;
 import de.saxsys.mvvmfx.InjectViewModel;
@@ -48,17 +42,16 @@ public class MainMenueView implements FxmlView<MainMenueViewModel>, Initializabl
         viewModel.SelectetPlayer().bind(saveGameListView.getSelectionModel().selectedItemProperty());
         newGameButton.disableProperty().bind(viewModel.getNewCommand().executableProperty().not());
         loadGameButton.disableProperty().bind(viewModel.getLoadCommand().executableProperty().not());
-
     }
 
     @FXML
     public void loadButtonPressed() {
-
         viewModel.getLoadCommand().execute();
     }
 
     @FXML
     public void newButtonPressed() {
+
         viewModel.getNewCommand().execute();
         final ViewTuple viewTuple = FluentViewLoader.fxmlView(GameInterfaceView.class).load();
         Stage stage = (Stage) exitButton.getScene().getWindow();
@@ -67,8 +60,6 @@ public class MainMenueView implements FxmlView<MainMenueViewModel>, Initializabl
 
     @FXML
     public void exitButtonPressed() {
-
         viewModel.getExitCommand().execute();
     }
-
 }
