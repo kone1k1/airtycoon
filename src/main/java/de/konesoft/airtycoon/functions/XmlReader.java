@@ -5,7 +5,7 @@
  */
 package de.konesoft.airtycoon.functions;
 
-import de.konesoft.airtycoon.model.Airplane;
+import de.konesoft.airtycoon.model.Airliner;
 import de.konesoft.airtycoon.model.Airport;
 import de.konesoft.airtycoon.model.Bank;
 import de.konesoft.airtycoon.model.Player;
@@ -29,7 +29,7 @@ import org.xml.sax.SAXException;
 public class XmlReader {
 
     private List<Airport> airports;
-    private List<Airplane> airplanes;
+    private List<Airliner> airplanes;
     private List<Player> players;
 
     public XmlReader() {
@@ -92,7 +92,7 @@ public class XmlReader {
                     short max_range = Short.parseShort(getValue("max_range", element));
                     short max_pax = Short.parseShort(getValue("max_pax", element));
                     short max_fuel = Short.parseShort(getValue("max_fuel", element));
-                    airplanes.add(new Airplane((byte) i, manufacturer, type, textinfo, speed, max_range, max_pax, max_fuel, price, airports.get(0)));
+                    airplanes.add(new Airliner((byte) i, manufacturer, type, textinfo, speed, max_range, max_pax, max_fuel, price, airports.get(0)));
                 }
             }
         } catch (IOException | NumberFormatException | ParserConfigurationException | SAXException ex) {
@@ -111,7 +111,7 @@ public class XmlReader {
             doc.getDocumentElement().normalize();
             NodeList nodes = doc.getElementsByTagName("player");
             for (int i = 0; i < nodes.getLength(); i++) {
-                List<Airplane> playerAirplanes = new ArrayList<>();
+                List<Airliner> playerAirplanes = new ArrayList<>();
                 Node node = nodes.item(i);
 
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
@@ -143,7 +143,7 @@ public class XmlReader {
         return players;
     }
 
-    public List<Airplane> getAirplanes() {
+    public List<Airliner> getAirplanes() {
         return airplanes;
     }
 

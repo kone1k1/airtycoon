@@ -1,11 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.konesoft.airtycoon;
 
-import de.konesoft.airtycoon.model.Airplane;
+import de.konesoft.airtycoon.model.Airliner;
 import de.konesoft.airtycoon.model.Airport;
 import de.konesoft.airtycoon.model.Player;
 import de.konesoft.airtycoon.functions.XmlReader;
@@ -19,6 +14,7 @@ public class GameLogic {
     private Player player;
 
     private GameLogic() {
+
     }
 
     public static GameLogic getSingletonGameLogic() {
@@ -27,6 +23,19 @@ public class GameLogic {
             singletonGameLogic = new GameLogic();
         }
         return singletonGameLogic;
+    }
+
+    public void newPlayer(String name) {
+        player = new Player(name);
+    }
+
+    /**
+     * Method for load existing Players
+     *
+     * @param player
+     */
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 
     public Player getPlayer() {
@@ -42,14 +51,14 @@ public class GameLogic {
 
     public ObservableList loadFleet() {
 
-        ObservableList<Airplane> playerFleet;
+        ObservableList<Airliner> playerFleet;
         playerFleet = FXCollections.observableArrayList(player.getFleet());
         return playerFleet;
     }
 
     public ObservableList xmlAirplanes() {
 
-        ObservableList<Airplane> airplanes;
+        ObservableList<Airliner> airplanes;
         airplanes = FXCollections.observableArrayList(xml.getAirplanes());
         return airplanes;
     }
@@ -61,11 +70,4 @@ public class GameLogic {
         return airports;
     }
 
-    public void newPlayer(String name) {
-        player = new Player(name);
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
 }

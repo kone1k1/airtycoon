@@ -2,7 +2,7 @@ package de.konesoft.airtycoon.gui;
 
 import de.konesoft.airtycoon.GameLogic;
 import de.konesoft.airtycoon.functions.Calculator;
-import de.konesoft.airtycoon.model.Airplane;
+import de.konesoft.airtycoon.model.Airliner;
 import de.konesoft.airtycoon.model.Airport;
 import de.saxsys.mvvmfx.ViewModel;
 import java.text.NumberFormat;
@@ -31,8 +31,8 @@ public class GameInterfaceViewModel implements ViewModel {
     private final ObjectProperty selectedBuyPlane = new SimpleObjectProperty();
 
     //FleetManagement
-    private final ListProperty<Airplane> playerFleet = new SimpleListProperty<>();
-    private final ObjectProperty<Airplane> selectedFleetPlane = new SimpleObjectProperty<>();
+    private final ListProperty<Airliner> playerFleet = new SimpleListProperty<>();
+    private final ObjectProperty<Airliner> selectedFleetPlane = new SimpleObjectProperty<>();
     private final StringProperty planeManufactor = new SimpleStringProperty();
     private final StringProperty planeType = new SimpleStringProperty();
     private final StringProperty planeKmCount = new SimpleStringProperty();
@@ -46,7 +46,7 @@ public class GameInterfaceViewModel implements ViewModel {
 
     //FlyManagement
     private final StringProperty planePosition = new SimpleStringProperty();
-    private final ObjectProperty<Airplane> selectedFlyPlane = new SimpleObjectProperty<>();
+    private final ObjectProperty<Airliner> selectedFlyPlane = new SimpleObjectProperty<>();
     private final ObjectProperty<Airport> selectedTarget = new SimpleObjectProperty<>();
     private final ListProperty<Airport> airports = new SimpleListProperty<>();
     private final IntegerProperty ticketPrice = new SimpleIntegerProperty();
@@ -110,7 +110,7 @@ public class GameInterfaceViewModel implements ViewModel {
             planeState.set(0);
             planeMaxFuel.set(40000);
             planeTankFuel.set(0);
-            planeImg.set(new Image("/img/boing737.jpg")); // Default IMGAE MISSION FOR NOW, SHOULD BE REPLACED
+            planeImg.set(new Image("/img/default.jpg"));
         }
     }
 
@@ -138,7 +138,7 @@ public class GameInterfaceViewModel implements ViewModel {
     public void buyPlane() {
 
         if (selectedBuyPlane.get() != null) {
-            gameLogic.getPlayer().buy_plane((Airplane) selectedBuyPlane.get());
+            gameLogic.getPlayer().buy_plane((Airliner) selectedBuyPlane.get());
             reloadPlayerInterface();
         }
     }
@@ -232,7 +232,7 @@ public class GameInterfaceViewModel implements ViewModel {
         return planeDescription;
     }
 
-    public ObjectProperty<Airplane> SelectedFleetPlaneProperty() {
+    public ObjectProperty<Airliner> SelectedFleetPlaneProperty() {
         return selectedFleetPlane;
     }
 
@@ -260,7 +260,7 @@ public class GameInterfaceViewModel implements ViewModel {
         return planePosition;
     }
 
-    public ObjectProperty<Airplane> SelectedFlyPlaneProperty() {
+    public ObjectProperty<Airliner> SelectedFlyPlaneProperty() {
         return selectedFlyPlane;
     }
 

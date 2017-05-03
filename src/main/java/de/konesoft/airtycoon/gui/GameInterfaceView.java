@@ -13,7 +13,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class GameInterfaceView implements FxmlView<GameInterfaceViewModel>, Initializable {

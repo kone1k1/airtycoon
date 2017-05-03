@@ -1,6 +1,6 @@
 package de.konesoft.airtycoon.functions;
 
-import de.konesoft.airtycoon.model.Airplane;
+import de.konesoft.airtycoon.model.Airliner;
 import de.konesoft.airtycoon.model.Airport;
 
 /**
@@ -24,14 +24,14 @@ public class Calculator {
         return dist / 1000;
     }
 
-    public static short TravelTime(short distance, Airplane plane) {
+    public static short TravelTime(short distance, Airliner plane) {
         
         short time = (short) (distance / plane.getSpeed());
         time *= 1.03;
         return time;
     }
 
-    public static short passangerAmount(Airplane airplane, Airport target, short price) {
+    public static short passangerAmount(Airliner airplane, Airport target, short price) {
         
         short calcPassanger = (short) (calcDistance(airplane.getPosition(), target) + airplane.getMaxPax() - (target.getCostIndex() / 10) * price);
         if (calcPassanger < 0) {

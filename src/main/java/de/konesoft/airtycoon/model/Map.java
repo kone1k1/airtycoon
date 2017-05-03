@@ -1,6 +1,6 @@
 package de.konesoft.airtycoon.model;
 
-import java.util.HashSet;
+import java.util.LinkedList;
 
 /**
  * Weltansicht mit allen Flugzeugpositionen und Airports, nur eine Instance
@@ -11,8 +11,9 @@ import java.util.HashSet;
 public class Map {
 
     private static Map mapInstance;
-
-    private HashSet<Positionable> positionList = new HashSet();
+    private static final int HEIGHT = 500;
+    private static final int WIDHT = 500;
+    private final LinkedList<Position> positionList = new LinkedList<>();
 
     private Map() {
 
@@ -26,22 +27,28 @@ public class Map {
         return mapInstance;
     }
 
-    public void addPosition(Positionable posi) {
-
-        if (posi != null) {
-            positionList.add(posi);
+    public void getPrintedMap() {
+        for (Position position : positionList) {
+            System.out.println(position.getLat() + position.getLng());
         }
     }
 
-    public void removePosition(Positionable posi) {
+    public void addPosition(Position posi) {
 
+        if (posi != null) {
+            positionList.addLast(posi);
+        }
+    }
+
+    public void removePlanePosition(Position posi) {
+        
         if (posi != null && positionList.contains(posi)) {
             positionList.remove(posi);
         }
     }
 
-    public void updatePositin(Positionable posi){
-    
-    
+    public Position getPosition(int i) {
+        return positionList.get(i);
     }
+
 }
