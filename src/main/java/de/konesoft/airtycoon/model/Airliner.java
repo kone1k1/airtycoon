@@ -10,7 +10,7 @@ import java.text.NumberFormat;
  */
 public class Airliner extends Airplane implements Cloneable {
 
-    private static final int MIN_PAX = 4;
+    private static final short MIN_PAX = 4;
     private final short maxPax;
     private short pax;
     private short fuel;

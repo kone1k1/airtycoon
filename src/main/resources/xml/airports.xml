@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <airports>
     <airport>
         <name>Berlin</name>
@@ -22,5 +17,11 @@ and open the template in the editor.
         <lat>48.1351253</lat>
         <lng>11.581980599</lng>
         <costindex>50</costindex>
+    </airport>
+        <airport>
+        <name>Toulouse</name>
+        <lat>43.604363</lat>
+        <lng>1.442951</lng>
+        <costindex>20</costindex>
     </airport>
 </airports>
