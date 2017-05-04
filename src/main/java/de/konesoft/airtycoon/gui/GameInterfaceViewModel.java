@@ -59,7 +59,7 @@ public class GameInterfaceViewModel implements ViewModel {
         ticketPrice.addListener((observable, oldValue, newValue) -> {
 
             if (selectedFlyPlane.get() != null && selectedTarget.get() != selectedFlyPlane.get().getPosition()) {
-                short buffer = Calculator.passangerAmount(selectedFlyPlane.get(), selectedTarget.get(), (short) ticketPrice.get());
+                short buffer = Calculator.calcPassengerAmount(selectedFlyPlane.get(), selectedTarget.get(), (short) ticketPrice.get());
                 ticketSold.set(buffer / (double) selectedFlyPlane.get().getMaxPax());
             }
         });
@@ -174,7 +174,7 @@ public class GameInterfaceViewModel implements ViewModel {
     public void flyPlane() {
 
         if (selectedFlyPlane.get() != null && selectedFlyPlane.get().getPosition() != selectedTarget.get()) {
-            selectedFlyPlane.get().setPax(Calculator.passangerAmount(selectedFlyPlane.get(), selectedTarget.get(), (short) ticketPrice.get()));
+            selectedFlyPlane.get().setPax(Calculator.calcPassengerAmount(selectedFlyPlane.get(), selectedTarget.get(), (short) ticketPrice.get()));
             gameLogic.getPlayer().getAccount().deposit(selectedFlyPlane.get().getPax() * ticketPrice.get());
             selectedFlyPlane.get().fly(selectedTarget.get());
             reloadFlyManagementInterface();
