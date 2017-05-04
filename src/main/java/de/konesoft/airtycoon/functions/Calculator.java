@@ -1,6 +1,7 @@
 package de.konesoft.airtycoon.functions;
 
 import de.konesoft.airtycoon.model.Airliner;
+import de.konesoft.airtycoon.model.Airplane;
 import de.konesoft.airtycoon.model.Airport;
 
 /**
@@ -24,7 +25,7 @@ public class Calculator {
         return dist / 1000;
     }
 
-    public static short TravelTime(short distance, Airliner plane) {
+    public static short TravelTime(short distance, Airplane plane) {
         
         short time = (short) (distance / plane.getSpeed());
         time *= 1.03;

@@ -11,24 +11,22 @@ import java.text.NumberFormat;
 public class Airliner extends Airplane implements Cloneable {
 
     private static final int MIN_PAX = 4;
-    private final short speed;
-    private final int price;
+    private final short maxPax;
     private short pax;
     private short fuel;
     private byte repearState;
     private int flightDistance;
-
     private Airport position;
 
     public Airliner(byte id, String manufacturer, String type, String textinfo, short speed, short maxRange, short maxPax, short maxFuel, int price, Airport position) {
-        super(id, manufacturer, type, textinfo, maxFuel, maxRange, maxPax);
-        this.speed = speed;
+
+        super(id, manufacturer, type, textinfo, speed, price, maxFuel, maxRange);
         this.position = position;
-        this.price = price;
         this.pax = MIN_PAX;
         this.fuel = 1000;
         this.repearState = 127;
         this.flightDistance = 0;
+        this.maxPax = maxPax;
     }
 
     @Override
@@ -53,11 +51,15 @@ public class Airliner extends Airplane implements Cloneable {
     }
 
     private int calcFuelConsumption(double distanceNm) {
-
-        int estimatedFuel = (int) (pax * 0.9 * (distanceNm * 0.539957) * 0.05926);
-        return estimatedFuel;
+        return (int) (pax * 0.9 * (distanceNm * 0.539957) * 0.05926);
     }
 
+    /**
+     * Boolean um einen Möglichen Absturz einzuberechen mithilfe des
+     * Repearstates
+     *
+     * @return true = Crash, false = OK
+     */
     private boolean crashTest() {
         return (byte) (Math.random() * repearState) == 0;
     }
@@ -68,20 +70,12 @@ public class Airliner extends Airplane implements Cloneable {
 
     @Override
     public String toString() {
-        return "Flugzeugtyp: " + super.getManufacturer() + " " + super.getType() + System.lineSeparator() + "Anzahl Sitze: " + super.getMaxPax() + System.lineSeparator() + "Preis: " + NumberFormat.getInstance().format(price) + " €";
+        return "Flugzeugtyp: " + super.getManufacturer() + " " + super.getType() + System.lineSeparator() + "Anzahl Sitze: " + maxPax + System.lineSeparator() + "Preis: " + NumberFormat.getInstance().format(super.getPrice()) + " €";
     }
 
     @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
-    }
-
-    public short getSpeed() {
-        return speed;
-    }
-
-    public int getPrice() {
-        return price;
     }
 
     public short getFuel() {
@@ -110,6 +104,10 @@ public class Airliner extends Airplane implements Cloneable {
 
     public byte getRepearState() {
         return repearState;
+    }
+
+    public short getMaxPax() {
+        return maxPax;
     }
 
 }

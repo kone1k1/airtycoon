@@ -1,6 +1,7 @@
 package de.konesoft.airtycoon.model;
 
 /**
+ * Basisklasse für mögliche Erweiterungen
  *
  * @author mastercs
  */
@@ -10,18 +11,20 @@ public abstract class Airplane {
     private final String manufacturer;
     private final String type;
     private final String description;
+    private final short speed;
+    private int price;
     private short maxFuel;
     private short maxRange;
-    private short maxPax;
 
-    public Airplane(byte id, String manufacturer, String type, String description, short maxFuel, short maxRange, short maxPax) {
+    public Airplane(byte id, String manufacturer, String type, String description, short speed, int price, short maxFuel, short maxRange) {
         this.id = id;
         this.manufacturer = manufacturer;
         this.type = type;
         this.description = description;
+        this.speed = speed;
+        this.price = price;
         this.maxFuel = maxFuel;
         this.maxRange = maxRange;
-        this.maxPax = maxPax;
     }
 
     public abstract void fly(Airport target);
@@ -42,14 +45,6 @@ public abstract class Airplane {
         this.maxRange = maxRange;
     }
 
-    public short getMaxPax() {
-        return maxPax;
-    }
-
-    public void setMaxPax(short maxPax) {
-        this.maxPax = maxPax;
-    }
-
     public byte getId() {
         return id;
     }
@@ -64,6 +59,18 @@ public abstract class Airplane {
 
     public String getType() {
         return type;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public short getSpeed() {
+        return speed;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
 }
