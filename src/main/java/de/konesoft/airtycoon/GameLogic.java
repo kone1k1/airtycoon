@@ -52,7 +52,7 @@ public class GameLogic {
     public ObservableList loadFleet() {
 
         ObservableList<Airliner> playerFleet;
-        playerFleet = FXCollections.observableArrayList(player.getFleet());
+        playerFleet = FXCollections.observableArrayList(player.getPlayerFleet());
         return playerFleet;
     }
 

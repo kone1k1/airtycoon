@@ -8,69 +8,71 @@ import java.text.NumberFormat;
  *
  * @author mastercs
  */
-public class Airliner extends Airplane implements Cloneable {
+public class Airliner extends Plane implements Cloneable {
 
-    private static final short MIN_PAX = 4;
-    private final short maxPax;
-    private short pax;
-    private short fuel;
-    private byte repearState;
-    private int flightDistance;
+    private static final short MIN_PASSANAGERS = 4;
+    private static final byte MAX_REPEARSTATE = 127;
+    private final short maxPassengers;
+    private short activePassangers;
+    private short planeFuel = 1000;
+    private byte repearState = MAX_REPEARSTATE;
+    private int flightDistance = 0;
     private Airport position;
 
     public Airliner(byte id, String manufacturer, String type, String textinfo, short speed, short maxRange, short maxPax, short maxFuel, int price, Airport position) {
 
         super(id, manufacturer, type, textinfo, speed, price, maxFuel, maxRange);
         this.position = position;
-        this.pax = MIN_PAX;
-        this.fuel = 1000;
-        this.repearState = 127;
-        this.flightDistance = 0;
-        this.maxPax = maxPax;
+        this.activePassangers = MIN_PASSANAGERS;
+        this.maxPassengers = maxPax;
     }
 
     @Override
-    public void fly(Airport target) {
-
-        int dist = Calculator.calcDistance(position, target);
-        int estimatedFuel = calcFuelConsumption(dist);
+    public void flyPlane(Airport target) {
 
         if (target != null && position != target) {
-
-            if ((dist < super.getMaxRange()) && (fuel > estimatedFuel) && !(crashTest())) {
-                position = target;
-                flightDistance += dist;
-                fuel -= estimatedFuel;
-                pax = MIN_PAX;
-                repearState--;
-                System.out.println("Das Flugzeug des Typs " + super.getManufacturer() + " " + super.getType() + " flog " + dist + " km!" + System.lineSeparator() + "Dabei verbrauchte es " + estimatedFuel + " KG Kerosin." + System.lineSeparator() + "Der Restbestand im Tank ist " + fuel + " KG Kerosin.");
-            } else {
-                System.out.println("Flugdistanz zu groß oder nicht genug Kerosin!");
+            if (checkFlightConditions(target)) {
+                afterFlightActions();
             }
         }
     }
 
-    private int calcFuelConsumption(double distanceNm) {
-        return (int) (pax * 0.9 * (distanceNm * 0.539957) * 0.05926);
+    private boolean checkFlightConditions(Airport target) {
+
+        int calcFlightDistance = Calculator.calcDistance(position, target);
+        int estimatedFuel = calcFuelConsumption(calcFlightDistance);
+        if ((calcFlightDistance < super.getMaxRange()) && (planeFuel > estimatedFuel) && !(isCrashed())) {
+            position = target;
+            flightDistance += calcFlightDistance;
+            planeFuel -= estimatedFuel;
+            System.out.println("Das Flugzeug des Typs " + super.getManufacturer() + " " + super.getType() + " flog " + calcFlightDistance + " km!" + System.lineSeparator() + "Dabei verbrauchte es " + estimatedFuel + " KG Kerosin." + System.lineSeparator() + "Der Restbestand im Tank ist " + planeFuel + " KG Kerosin.");
+            return true;
+        } else {
+            System.out.println("Flugdistanz zu groß oder nicht genug Kerosin!");
+            return false;
+        }
     }
 
-    /**
-     * Boolean um einen Möglichen Absturz einzuberechen mithilfe des
-     * Repearstates
-     *
-     * @return true = Crash, false = OK
-     */
-    private boolean crashTest() {
+    private void afterFlightActions() {
+        activePassangers = MIN_PASSANAGERS;
+        repearState--;
+    }
+
+    private int calcFuelConsumption(double distanceNm) {
+        return (int) (activePassangers * 0.9 * (distanceNm * 0.539957) * 0.05926);
+    }
+
+    private boolean isCrashed() {
         return (byte) (Math.random() * repearState) == 0;
     }
 
     public void repair() {
-        repearState = 127;
+        repearState = MAX_REPEARSTATE;
     }
 
     @Override
     public String toString() {
-        return "Flugzeugtyp: " + super.getManufacturer() + " " + super.getType() + System.lineSeparator() + "Anzahl Sitze: " + maxPax + System.lineSeparator() + "Preis: " + NumberFormat.getInstance().format(super.getPrice()) + " €";
+        return "Flugzeugtyp: " + super.getManufacturer() + " " + super.getType() + System.lineSeparator() + "Anzahl Sitze: " + maxPassengers + System.lineSeparator() + "Preis: " + NumberFormat.getInstance().format(super.getPrice()) + " €";
     }
 
     @Override
@@ -78,24 +80,20 @@ public class Airliner extends Airplane implements Cloneable {
         return super.clone();
     }
 
-    public short getFuel() {
-        return fuel;
+    public short getPlaneFuel() {
+        return planeFuel;
     }
 
-    public short getPax() {
-        return pax;
+    public short getActivePassangers() {
+        return activePassangers;
     }
 
-    public Airport getPosition() {
-        return position;
+    public void setActivePassangers(short activePassangers) {
+        this.activePassangers = activePassangers;
     }
 
-    public void setPax(short pax) {
-        this.pax = pax;
-    }
-
-    public void setFuel(short fuel) {
-        this.fuel = fuel;
+    public void setPlaneFuel(short planeFuel) {
+        this.planeFuel = planeFuel;
     }
 
     public int getFlightDistance() {
@@ -106,8 +104,12 @@ public class Airliner extends Airplane implements Cloneable {
         return repearState;
     }
 
-    public short getMaxPax() {
-        return maxPax;
+    public short getMaxPassengers() {
+        return maxPassengers;
+    }
+
+    public Airport getPosition() {
+        return position;
     }
 
 }

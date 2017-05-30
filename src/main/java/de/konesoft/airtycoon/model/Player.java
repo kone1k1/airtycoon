@@ -13,13 +13,8 @@ public class Player {
     private final String name;
 
     private final Bank account;
-    private final List<Airliner> fleet = new ArrayList<>();
+    private final List<Airliner> playerFleet = new ArrayList<>();
 
-    /**
-     * Neues Spiel
-     *
-     * @param name Name des Spieler
-     */
     public Player(String name) {
 
         this.id = 0;
@@ -27,44 +22,36 @@ public class Player {
         this.account = new Bank();
     }
 
-    /**
-     * Laden eines Spielstandes
-     *
-     * @param id Einmalige Ident Nummer für den Spieler
-     * @param name Name des Spieler
-     * @param account Bank des Spielers
-     * @param fleet
-     */
     public Player(byte id, String name, Bank account, List<Airliner> fleet) {
 
         this.id = id;
         this.name = name;
         this.account = account;
-        this.fleet.addAll(0, fleet);
+        this.playerFleet.addAll(0, fleet);
     }
 
-    public void buy_plane(Airliner plane) {
+    public void buyPlane(Airliner plane) {
 
-        if (account.transaction(plane.getPrice())) {
+        if (account.pay(plane.getPrice())) {
             try {
-                fleet.add((Airliner) plane.clone());
+                playerFleet.add((Airliner) plane.clone());
             } catch (CloneNotSupportedException ex) {
                 ex.getStackTrace();
             }
         }
     }
 
-    public void repair(Airliner plane) {
+    public void repairPlane(Airliner plane) {
 
-        if (account.transaction((int) (plane.getPrice() * 0.1))) {
+        if (account.pay((int) (plane.getPrice() * 0.1))) {
             plane.repair();
         }
     }
 
-    public void sell_plane(Airliner plane) {
+    public void sellPlane(Airliner plane) {
 
         account.deposit((int) (plane.getPrice() * 0.3));
-        fleet.remove(fleet.lastIndexOf(plane));
+        playerFleet.remove(playerFleet.lastIndexOf(plane));
     }
 
     @Override
@@ -72,8 +59,8 @@ public class Player {
         return "ID: " + id + System.lineSeparator() + "Name: " + name + System.lineSeparator() + "Bankguthaben: " + account.getMoney();
     }
 
-    public List<Airliner> getFleet() {
-        return fleet;
+    public List<Airliner> getPlayerFleet() {
+        return playerFleet;
     }
 
     public Bank getAccount() {
@@ -81,7 +68,7 @@ public class Player {
     }
 
     public Airliner getAirplane(int index) {
-        return fleet.get(index);
+        return playerFleet.get(index);
     }
 
     public String getName() {

@@ -6,32 +6,19 @@ package de.konesoft.airtycoon.model;
  */
 public class Position {
 
-    private final int id;
-    private final boolean type;
+    private final boolean isAirplane;
     private float lat;
     private float lng;
 
-    /**
-     *
-     * @param id unique ID
-     * @param type false = Airport ; true = Airplane
-     * @param lat Latitude Position
-     * @param lng Longitude Position
-     */
-    public Position(int id, boolean type, float lat, float lng) {
+    public Position(boolean type, float lat, float lng) {
 
-        this.id = id;
-        this.type = type;
+        this.isAirplane = type;
         this.lat = lat;
         this.lng = lng;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public boolean getType() {
-        return type;
+    public boolean isAirplane() {
+        return isAirplane;
     }
 
     public float getLat() {
@@ -55,4 +42,5 @@ public class Position {
         this.lat = lat;
         this.lng = lng;
     }
+
 }

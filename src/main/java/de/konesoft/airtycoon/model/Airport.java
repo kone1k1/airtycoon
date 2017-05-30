@@ -12,24 +12,14 @@ public class Airport {
     private final float lat;
     private final float lng;
     private final byte costIndex;
-    private final Position position;
 
-    /**
-     *
-     * @param id Einmaleige Ident Nummer des Flughafen
-     * @param name Name des Flughafen
-     * @param lat Höhrengrad des Flughafen
-     * @param lng Breitengrad des Flughafen
-     * @param costindex
-     */
     public Airport(byte id, String name, float lat, float lng, byte costindex) {
 
         this.id = id;
         this.name = name;
+        this.costIndex = costindex;
         this.lat = lat;
         this.lng = lng;
-        this.costIndex = costindex;
-        position = new Position(id, false, lat, lng);
     }
 
     @Override
@@ -56,5 +46,4 @@ public class Airport {
     public float getLng() {
         return lng;
     }
-    
 }

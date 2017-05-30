@@ -12,7 +12,6 @@ public class Bank {
     private int credit;
     private static final int MAX_CREDIT_VALUE = 50000000;
 
-    //Neues Spiel
     public Bank() {
 
         this.id = 0;
@@ -20,13 +19,6 @@ public class Bank {
         this.credit = 0;
     }
 
-    /**
-     * Die Bank eines geladenen Spielers erstellen
-     *
-     * @param id
-     * @param money
-     * @param credit
-     */
     public Bank(byte id, int money, int credit) {
 
         this.id = id;
@@ -34,21 +26,19 @@ public class Bank {
         this.credit = credit;
     }
 
-    public boolean transaction(int amount) {
+    public boolean pay(int amount) {
 
         if (amount <= money) {
             money -= amount;
             return true;
         } else {
-
             return false;
         }
     }
 
     public void orderCredit(int amount) {
 
-        if (creditCheck()) {
-
+        if (creditCheck(amount)) {
             credit += amount;
             money += amount;
         }
@@ -62,8 +52,8 @@ public class Bank {
         }
     }
 
-    private boolean creditCheck() {
-        return credit < MAX_CREDIT_VALUE;
+    private boolean creditCheck(int amount) {
+        return credit + amount < MAX_CREDIT_VALUE;
     }
 
     public void deposit(int amount) {

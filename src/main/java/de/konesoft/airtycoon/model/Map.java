@@ -14,6 +14,7 @@ public class Map {
     private static final int HEIGHT = 500;
     private static final int WIDHT = 500;
     private final LinkedList<Position> positionList = new LinkedList<>();
+    private final LinkedList<Airport> airportList = new LinkedList<>();
 
     private Map() {
 
@@ -33,6 +34,14 @@ public class Map {
         }
     }
 
+    public void addAirport(Airport airport) {
+
+        if (airport != null) {
+            airportList.add(airport);
+            System.out.println(airportList.toString());
+        }
+    }
+
     public void addPosition(Position posi) {
 
         if (posi != null) {
@@ -41,7 +50,7 @@ public class Map {
     }
 
     public void removePlanePosition(Position posi) {
-        
+
         if (posi != null && positionList.contains(posi)) {
             positionList.remove(posi);
         }
