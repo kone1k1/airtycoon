@@ -13,8 +13,8 @@ public class Map {
     private static Map mapInstance;
     private static final int HEIGHT = 500;
     private static final int WIDHT = 500;
-    private final LinkedList<Position> positionList = new LinkedList<>();
-    private final LinkedList<Airport> airportList = new LinkedList<>();
+    private final LinkedList<Position> planePositions = new LinkedList<>();
+    private final LinkedList<Airport> airportPositions = new LinkedList<>();
 
     private Map() {
 
@@ -28,36 +28,30 @@ public class Map {
         return mapInstance;
     }
 
-    public void getPrintedMap() {
-        for (Position position : positionList) {
-            System.out.println(position.getLat() + position.getLng());
-        }
+    public void drawMap() {
+
     }
 
     public void addAirport(Airport airport) {
 
         if (airport != null) {
-            airportList.add(airport);
-            System.out.println(airportList.toString());
+            airportPositions.add(airport);
+            System.out.println(airportPositions.toString());
         }
     }
 
     public void addPosition(Position posi) {
 
         if (posi != null) {
-            positionList.addLast(posi);
+            planePositions.add(posi);
         }
     }
 
     public void removePlanePosition(Position posi) {
 
-        if (posi != null && positionList.contains(posi)) {
-            positionList.remove(posi);
+        if (posi != null && planePositions.contains(posi)) {
+            planePositions.remove(posi);
         }
-    }
-
-    public Position getPosition(int i) {
-        return positionList.get(i);
     }
 
 }

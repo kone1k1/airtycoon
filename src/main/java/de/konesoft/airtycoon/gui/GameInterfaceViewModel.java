@@ -4,6 +4,7 @@ import de.konesoft.airtycoon.GameLogic;
 import de.konesoft.airtycoon.functions.Calculator;
 import de.konesoft.airtycoon.model.Airliner;
 import de.konesoft.airtycoon.model.Airport;
+import de.konesoft.airtycoon.model.Map;
 import de.saxsys.mvvmfx.ViewModel;
 import java.text.NumberFormat;
 import javafx.beans.property.DoubleProperty;
@@ -59,7 +60,7 @@ public class GameInterfaceViewModel implements ViewModel {
 
         ticketPrice.addListener((observable, oldValue, newValue) -> {
 
-            if (selectedFlyPlane.get() != null && selectedTarget.get() != selectedFlyPlane.get().getPosition()) {
+            if (selectedFlyPlane.get() != null && selectedTarget.get().getPosition() != selectedFlyPlane.get().getPosition()) {
                 short buffer = Calculator.calcPassengerAmount(selectedFlyPlane.get(), selectedTarget.get(), (short) ticketPrice.get());
                 ticketSold.set(buffer / (double) selectedFlyPlane.get().getMaxPassengers());
             }
@@ -93,13 +94,13 @@ public class GameInterfaceViewModel implements ViewModel {
 
         if (selectedFleetPlane.get() != null) {
             planeKmCount.set(selectedFleetPlane.get().getFlightDistance() + " km");
-            planeManufactor.set(selectedFleetPlane.get().getManufacturer());
+            planeManufactor.set(selectedFleetPlane.get().getManufactor());
             planeType.set(selectedFleetPlane.get().getType());
-            planeFuel.set((double) selectedFleetPlane.get().getPlaneFuel() / selectedFleetPlane.get().getMaxFuel());
+            planeFuel.set((double) selectedFleetPlane.get().getFuel() / selectedFleetPlane.get().getMaxFuel());
             planeState.set(selectedFleetPlane.get().getRepearState() / 127F);
             planeDescription.set(selectedFleetPlane.get().getDescription());
             planeMaxFuel.set(selectedFleetPlane.get().getMaxFuel());
-            planeTankFuel.set(selectedFleetPlane.get().getPlaneFuel());
+            planeTankFuel.set(selectedFleetPlane.get().getFuel());
             planeImg.set(new Image("/img/" + selectedFleetPlane.get().getType() + ".jpg"));
         } else {
             planeKmCount.set("");
@@ -117,7 +118,7 @@ public class GameInterfaceViewModel implements ViewModel {
     private void reloadFlyManagementInterface() {
 
         if (selectedFlyPlane.get() != null) {
-            planePositionLabel.set("Position: " + selectedFlyPlane.get().getPosition().getName());
+            planePositionLabel.set("Position: " + selectedFlyPlane.get().getPosition().getLatitude());
         } else {
             planePositionLabel.set("Position:");
         }
@@ -155,7 +156,7 @@ public class GameInterfaceViewModel implements ViewModel {
     public void refuelPlane() {
 
         if (selectedFleetPlane.get() != null) {
-            selectedFleetPlane.get().setPlaneFuel((short) planeTankFuel.get());
+            selectedFleetPlane.get().refuel(planeTankFuel.get());
             reloadPlayerInterface();
             reloadFleetManagementInterface();
         }
@@ -172,11 +173,11 @@ public class GameInterfaceViewModel implements ViewModel {
     }
 
     public void flyPlane() {
-
-        if (selectedFlyPlane.get() != null && selectedFlyPlane.get().getPosition() != selectedTarget.get()) {
-            selectedFlyPlane.get().setActivePassangers(Calculator.calcPassengerAmount(selectedFlyPlane.get(), selectedTarget.get(), (short) ticketPrice.get()));
-            gameLogic.getPlayer().getAccount().deposit(selectedFlyPlane.get().getActivePassangers() * ticketPrice.get());
-            selectedFlyPlane.get().flyPlane(selectedTarget.get());
+        Map.getMapInstance().drawMap();
+        if (selectedFlyPlane.get() != null && selectedFlyPlane.get().getPosition() != selectedTarget.get().getPosition()) {
+            selectedFlyPlane.get().loadPassengers(Calculator.calcPassengerAmount(selectedFlyPlane.get(), selectedTarget.get(), (short) ticketPrice.get()));
+            gameLogic.getPlayer().getAccount().deposit(selectedFlyPlane.get().getPassengers() * ticketPrice.get());
+            selectedFlyPlane.get().fly(selectedTarget.get().getPosition());
             reloadFlyManagementInterface();
             reloadFleetManagementInterface();
             reloadPlayerInterface();

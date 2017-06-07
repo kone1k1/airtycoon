@@ -6,41 +6,39 @@ package de.konesoft.airtycoon.model;
  */
 public class Position {
 
-    private final boolean isAirplane;
-    private float lat;
-    private float lng;
+    private float latitude;
+    private float longitude;
 
-    public Position(boolean type, float lat, float lng) {
-
-        this.isAirplane = type;
-        this.lat = lat;
-        this.lng = lng;
+    public Position(float latitude, float longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
-    public boolean isAirplane() {
-        return isAirplane;
+    public float getLatitude() {
+        return latitude;
     }
 
-    public float getLat() {
-        return lat;
+    public float getLongitude() {
+        return longitude;
     }
 
-    public float getLng() {
-        return lng;
+    public void setLatLong(float latitude, float longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
-    public void setLat(float lat) {
-        this.lat = lat;
+    @Override
+    public boolean equals(Object o) {
+        return (o instanceof Position && compare((Position) o));
     }
 
-    public void setLng(float lng) {
-        this.lng = lng;
+    private boolean compare(Position compare) {
+        return this.latitude == compare.latitude && this.longitude == compare.longitude;
     }
 
-    public void setLatLng(float lat, float lng) {
-
-        this.lat = lat;
-        this.lng = lng;
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 
 }

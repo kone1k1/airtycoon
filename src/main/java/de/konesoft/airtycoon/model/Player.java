@@ -33,11 +33,11 @@ public class Player {
     public void buyPlane(Airliner plane) {
 
         if (account.pay(plane.getPrice())) {
-            try {
-                playerFleet.add((Airliner) plane.clone());
-            } catch (CloneNotSupportedException ex) {
-                ex.getStackTrace();
-            }
+            Airliner boughtAirliner = new Airliner(plane.getManufactor(), plane.getType(), plane.getDescription(), plane.getCrew(), plane.getMaxFuel(),
+                    plane.getMaxSpeed(), plane.getPrice(), plane.getMaxRange(), plane.getMaxPassengers());
+            boughtAirliner.setPosition(new Position(52.52000659999999F, 13.404953999999975F));
+            playerFleet.add(boughtAirliner);
+
         }
     }
 
@@ -48,7 +48,7 @@ public class Player {
         }
     }
 
-    public void sellPlane(Airliner plane) {
+    public void sellPlane(Aircraft plane) {
 
         account.deposit((int) (plane.getPrice() * 0.3));
         playerFleet.remove(playerFleet.lastIndexOf(plane));

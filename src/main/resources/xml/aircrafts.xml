@@ -12,6 +12,7 @@ and open the template in the editor.
         <type>737-400</type>
         <max_pax>188</max_pax>
         <textinfo>Die Boeing 737 des US-amerikanischen Flugzeugherstellers Boeing ist die weltweit meistgebaute Familie strahlgetriebener Verkehrsflugzeuge. Der als Schmalrumpfflugzeug ausgelegte Typ wird mittlerweile in der dritten Generation gefertigt und hat über die Zeit seine äußere Erscheinung kaum geändert. </textinfo>
+        <crew>10</crew>
         <max_range>5000</max_range>
         <price>1500000</price>
         <speed>907</speed>
@@ -21,6 +22,7 @@ and open the template in the editor.
         <manufacturer>Boing</manufacturer>
         <type>727-200</type>
         <max_pax>189</max_pax>
+        <crew>10</crew>
         <textinfo>Die Boeing 727 ist ein dreistrahliges Verkehrsflugzeug des amerikanischen Flugzeugherstellers Boeing in Tiefdeckerauslegung für den Passagier- und Frachttransport auf Mittel- und Kurzstrecken. Mit 1.832 hergestellten Exemplaren war die Boeing 727 eine Zeit lang das meistgebaute Düsenverkehrsflugzeug der Welt, bis sie darin von der Boeing 737 abgelöst wurde.</textinfo>
         <max_range>4020</max_range>
         <price>15000000</price>
@@ -31,6 +33,7 @@ and open the template in the editor.
         <manufacturer>Airbus</manufacturer>
         <type>A320-200</type>
         <max_pax>180</max_pax>
+        <crew>10</crew>
         <textinfo>Als Airbus-A320-Familie werden die vier Schmalrumpfflugzeug-Baureihen des Flugzeugherstellers Airbus für die Kurz- und Mittelstrecke bezeichnet. Die A320 war dabei als erste Variante das Basismodell der als Tiefdecker ausgeführten A320-Familie.</textinfo>
         <max_range>6150</max_range>
         <price>2000000</price>

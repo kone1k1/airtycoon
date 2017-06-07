@@ -7,24 +7,19 @@ package de.konesoft.airtycoon.model;
  */
 public class Airport {
 
-    private final byte id;
     private final String name;
-    private final float lat;
-    private final float lng;
     private final byte costIndex;
+    private final Position position;
 
-    public Airport(byte id, String name, float lat, float lng, byte costindex) {
-
-        this.id = id;
+    public Airport(String name, byte costIndex, Position position) {
         this.name = name;
-        this.costIndex = costindex;
-        this.lat = lat;
-        this.lng = lng;
+        this.costIndex = costIndex;
+        this.position = position;
     }
 
     @Override
     public String toString() {
-        return name;
+        return "Flughafen: " + name;
     }
 
     public String getName() {
@@ -35,15 +30,8 @@ public class Airport {
         return costIndex;
     }
 
-    public byte getId() {
-        return id;
+    public Position getPosition() {
+        return position;
     }
 
-    public float getLat() {
-        return lat;
-    }
-
-    public float getLng() {
-        return lng;
-    }
 }

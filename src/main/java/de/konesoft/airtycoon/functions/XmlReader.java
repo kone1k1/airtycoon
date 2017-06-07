@@ -3,7 +3,6 @@ package de.konesoft.airtycoon.functions;
 import de.konesoft.airtycoon.model.Airliner;
 import de.konesoft.airtycoon.model.Airport;
 import de.konesoft.airtycoon.model.Bank;
-import de.konesoft.airtycoon.model.Map;
 import de.konesoft.airtycoon.model.Player;
 import de.konesoft.airtycoon.model.Position;
 import java.io.File;
@@ -19,10 +18,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-/**
- *
- * @author mastercs
- */
 public class XmlReader {
 
     private List<Airport> airports;
@@ -57,7 +52,7 @@ public class XmlReader {
                     float lng = Float.parseFloat(getValue("lng", element));
                     byte costindex = Byte.parseByte(getValue("costindex", element));
 
-                    airports.add(new Airport((byte) i, name, lat, lng, costindex));
+                    airports.add(new Airport(name, costindex, new Position(lat, lng)));
                 }
             }
         } catch (IOException | NumberFormatException | ParserConfigurationException | SAXException ex) {
@@ -68,6 +63,7 @@ public class XmlReader {
     private void loadAirplanes() {
 
         airplanes = new ArrayList<>();
+
         try {
             File stocks = new File("src/main/resources/xml/aircrafts.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -84,12 +80,14 @@ public class XmlReader {
                     String manufacturer = getValue("manufacturer", element);
                     String type = getValue("type", element);
                     String textinfo = getValue("textinfo", element);
+                    byte crew = Byte.parseByte(getValue("crew", element));
                     short speed = Short.parseShort(getValue("speed", element));
                     int price = Integer.parseInt(getValue("price", element));
-                    short max_range = Short.parseShort(getValue("max_range", element));
-                    short max_pax = Short.parseShort(getValue("max_pax", element));
-                    short max_fuel = Short.parseShort(getValue("max_fuel", element));
-                    airplanes.add(new Airliner((byte) i, manufacturer, type, textinfo, speed, max_range, max_pax, max_fuel, price, airports.get(0)));
+                    short maxRange = Short.parseShort(getValue("max_range", element));
+                    short maxPax = Short.parseShort(getValue("max_pax", element));
+                    short maxFuel = Short.parseShort(getValue("max_fuel", element));
+
+                    airplanes.add(new Airliner(manufacturer, type, textinfo, crew, maxFuel, speed, price, maxRange, maxPax));
                 }
             }
         } catch (IOException | NumberFormatException | ParserConfigurationException | SAXException ex) {
