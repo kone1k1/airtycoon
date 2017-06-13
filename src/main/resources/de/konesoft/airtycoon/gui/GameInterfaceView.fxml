@@ -45,7 +45,7 @@
                            </font>
                         </Button>
                         <Slider fx:id="sldPlayerOrderCredit" blockIncrement="100000.0" layoutX="45.0" layoutY="447.0" majorTickUnit="200000.0" max="1000000.0" minorTickCount="1" prefHeight="48.0" prefWidth="516.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
-                        <ListView fx:id="lstBuyablePlanes" layoutX="820.0" layoutY="71.0" prefHeight="544.0" prefWidth="319.0" />
+                        <ListView fx:id="lstBuyablePlanes" layoutX="820.0" layoutY="71.0" prefHeight="472.0" prefWidth="319.0" />
                         <Button layoutX="990.0" layoutY="624.0" mnemonicParsing="false" onAction="#buyPlaneButtonPressed" prefHeight="37.0" prefWidth="149.0" text="Flugzeug kaufen">
                            <font>
                               <Font size="14.0" />

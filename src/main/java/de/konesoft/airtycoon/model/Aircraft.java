@@ -17,7 +17,7 @@ public abstract class Aircraft {
     private int flightDistance = 0;
     private final int price;
     private final short maxRange;
-    private Position position;
+    private Position position = new Position(52.52000659999999F, 13.404953999999975F);
 
     public Aircraft(String manufactor, String type, String description, byte crew, int maxFuel, short maxSpeed, int price, short maxRange) {
 

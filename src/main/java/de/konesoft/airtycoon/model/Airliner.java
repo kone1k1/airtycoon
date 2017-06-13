@@ -21,6 +21,12 @@ public class Airliner extends Aircraft {
         this.maxPassengers = maxPassengers;
     }
 
+    public Airliner(Airliner toClone) {
+        super(toClone.getManufactor(), toClone.getType(), toClone.getDescription(), toClone.getCrew(), toClone.getMaxFuel(),
+                toClone.getMaxSpeed(), toClone.getPrice(), toClone.getMaxRange());
+        this.maxPassengers = toClone.maxPassengers;
+    }
+
     @Override
     public void fly(Position target) {
         if (target != null && !target.equals(getPosition())) {
@@ -34,14 +40,18 @@ public class Airliner extends Aircraft {
 
         int calcFlightDistance = Calculator.calcDistance(getPosition(), target);
         int estimatedFuel = calcFuelConsumption(calcFlightDistance);
+
         if ((calcFlightDistance < super.getMaxRange()) && (getFuel() > estimatedFuel) && !(isCrashed())) {
+
             getPosition().setLatLong(target.getLatitude(), target.getLongitude());
             setFlightDistance(calcFlightDistance);
             useFuel(estimatedFuel);
 
             System.out.println("Das Flugzeug des Typs " + super.getManufactor() + " " + super.getType() + " flog " + calcFlightDistance + " km!" + System.lineSeparator() + "Dabei verbrauchte es " + estimatedFuel + " KG Kerosin." + System.lineSeparator() + "Der Restbestand im Tank ist " + getFuel() + " KG Kerosin.");
             return true;
+
         } else {
+
             System.out.println("Flugdistanz zu groß oder nicht genug Kerosin!");
             return false;
         }
@@ -62,12 +72,13 @@ public class Airliner extends Aircraft {
 
     @Override
     public String toString() {
-        return super.getManufactor() + " " +super.getType();
+        return super.getManufactor() + " " + super.getType() + " Preis: " + super.getPrice();
     }
 
     public void loadPassengers(short passengers) {
 
         if (this.passengers + passengers >= maxPassengers) {
+
             this.passengers = maxPassengers;
         } else {
             this.passengers += passengers;

@@ -12,6 +12,7 @@ public class Airport {
     private final Position position;
 
     public Airport(String name, byte costIndex, Position position) {
+        
         this.name = name;
         this.costIndex = costIndex;
         this.position = position;

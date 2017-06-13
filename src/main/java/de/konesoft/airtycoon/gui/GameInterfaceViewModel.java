@@ -88,6 +88,7 @@ public class GameInterfaceViewModel implements ViewModel {
 
         //FleetManagement
         playerFleet.set(gameLogic.loadFleet());
+
     }
 
     private void reloadFleetManagementInterface() {

@@ -10,6 +10,7 @@ public class Position {
     private float longitude;
 
     public Position(float latitude, float longitude) {
+        
         this.latitude = latitude;
         this.longitude = longitude;
     }
@@ -23,6 +24,7 @@ public class Position {
     }
 
     public void setLatLong(float latitude, float longitude) {
+        
         this.latitude = latitude;
         this.longitude = longitude;
     }
@@ -32,13 +34,13 @@ public class Position {
         return (o instanceof Position && compare((Position) o));
     }
 
-    private boolean compare(Position compare) {
-        return this.latitude == compare.latitude && this.longitude == compare.longitude;
-    }
-
     @Override
     public int hashCode() {
-        return super.hashCode();
+        return super.hashCode(); 
+    }
+
+    private boolean compare(Position compare) {
+        return this.latitude == compare.latitude && this.longitude == compare.longitude;
     }
 
 }

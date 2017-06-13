@@ -33,11 +33,7 @@ public class Player {
     public void buyPlane(Airliner plane) {
 
         if (account.pay(plane.getPrice())) {
-            Airliner boughtAirliner = new Airliner(plane.getManufactor(), plane.getType(), plane.getDescription(), plane.getCrew(), plane.getMaxFuel(),
-                    plane.getMaxSpeed(), plane.getPrice(), plane.getMaxRange(), plane.getMaxPassengers());
-            boughtAirliner.setPosition(new Position(52.52000659999999F, 13.404953999999975F));
-            playerFleet.add(boughtAirliner);
-
+            playerFleet.add(new Airliner(plane));
         }
     }
 
